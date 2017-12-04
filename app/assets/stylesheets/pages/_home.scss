@@ -1,1 +1,37 @@
 // Specific CSS for your home-page
+body {
+  margin: 0;
+  margin-bottom: 0px;
+  font-family: 'Varela Round', sans-serif;
+}
+.text-center {
+  text-align: center;
+}
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
+
+/*2e import*/
+
+h1, h2, h3 {
+  font-family: Raleway, Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 0;
+}
+.padded {
+  padding: 100px 0;
+}
+.wrapper-grey {
+  background: #F4F4F4;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+

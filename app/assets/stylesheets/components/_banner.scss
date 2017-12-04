@@ -1,0 +1,54 @@
+.banner {
+  color: white;
+  text-align: center;
+  height: 100vh;
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner h1 {
+  font-size: 50px;
+  font-weight: bold;
+  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+}
+
+.banner p {
+  font-size: 25px;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 50px;
+}
+.banner .btn {
+  margin-top: 0px;
+  background-color: rgba(70, 175, 248, 0.8);
+  border: blue;
+  border-radius: 7px;
+  font-size: 25px;
+
+}
+.btn:hover {
+  background-color: rgba(80, 185, 249, 1);
+  color: white;
+}
+
+
+.banner a {
+  text-decoration: none
+}
+
+.form-control {
+  margin: 10px;
+  padding: 10px;
+}
+
+form {
+  margin: 10px;
+  padding: 10px;
+}
+
+.messenger-button {
+  background: url('../../images/messenger.png') left center no-repeat;
+  padding-left: 15px;
+}
