@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 Domain.destroy_all
 
 resorts = [
@@ -76,8 +75,3 @@ valmorel = Domain.create(name: "Valmorel", name_url: "valmorel", mountain_chain:
 # le_ballon_dalsace = Domain.create(name: "Le Ballon d'Alsace", name_url: "le-ballon-dalsace", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # gerardmer = Domain.create(name: "Gérardmer", name_url: "gerardmer", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # la_bresse_hohneck = Domain.create(name: "La Bresse Hohneck", name_url: "la-bresse-hohneck", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
-
-
-
-
-
