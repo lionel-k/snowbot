@@ -1,7 +1,3 @@
-require 'open-uri'
-require 'json'
-
-
 class OffersController < ApplicationController
   def index
     # 1. Search for cheapest cars on Drivy
