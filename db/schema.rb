@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204155224) do
+ActiveRecord::Schema.define(version: 20171204164936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "domains", force: :cascade do |t|
+    t.string "name"
+    t.string "mountain_chain"
+    t.boolean "is_sunny"
+    t.string "forecast_data"
+    t.integer "snow_depth_low"
+    t.integer "snow_depth_high"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "location"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "guests_number"
+    t.string "checkin"
+    t.string "checkout"
+    t.string "start_city"
+    t.string "drivy_data"
+    t.string "homeaway_data"
+    t.bigint "domain_id"
+    t.integer "total_price"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain_id"], name: "index_orders_on_domain_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +61,6 @@ ActiveRecord::Schema.define(version: 20171204155224) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "orders", "domains"
+  add_foreign_key "orders", "users"
 end
