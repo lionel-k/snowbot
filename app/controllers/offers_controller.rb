@@ -28,6 +28,7 @@ class OffersController < ApplicationController
     # for all best domains, find the cheapest flat using the homeaway API
     # input: AvailabilityStart, AvailabilityEnd, distanceInKm, lat/lng of the domain, minBedrooms
     # output: 3 instances of object Flat
+    FetchHomeAwayService.new(lo)
   end
 
   def build_package
