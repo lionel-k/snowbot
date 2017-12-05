@@ -6,7 +6,14 @@
     <%= image_tag offer.flat.photo, size: "150" %>
     <%= image_tag offer.car.photo, size: "200" %>
     <%= link_to "See details", offers_path %>
-    <%= link_to "Order this package", orders_path, class: "btn btn-primary" %>
+    <%= simple_form_for(@order)  do |f| %>
+    <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
+    <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car.photo } %>
+    <%= f.input :flat_price, :as => :hidden, :input_html => { :value => offer.flat.price_by_night } %>
+    <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat.photo } %>
+    <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.flat.domain.id } %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
     </p>
   <% end %>
 </div>

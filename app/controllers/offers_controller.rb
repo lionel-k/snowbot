@@ -10,7 +10,7 @@ class OffersController < ApplicationController
     @flats = search_flats
     # 5. From the cars and the flats, create a package which a list of 3 offers
     @offers = build_package
-    # raise
+    @order = Order.new
   end
 
   def search_cars
