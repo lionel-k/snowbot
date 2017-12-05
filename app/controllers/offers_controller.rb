@@ -38,6 +38,6 @@ class OffersController < ApplicationController
     # return the cheapest cars found on Drivy
     # input: location of the user, checkin at 8:00, checkout 20:00, distance: 2000kms, family car, instant booking
     # output: 3 instances of object Car
-    FetchDrivySearch.new
+    FetchDrivySearch.new(lo)
   end
 end

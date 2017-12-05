@@ -59,7 +59,4 @@ class FetchDrivySearch
     returned_car
 
   end
-
-
-
 end
