@@ -1,3 +1,12 @@
 <div class="container">
   <h1>Offers found for you</h1>
+  <% @offers.each do |offer| %>
+    <h2>Offer <%= offer.id %></h2>
+    <p><%= offer.flat.domain.name %>
+    <%= image_tag offer.flat.photo, size: "150" %>
+    <%= image_tag offer.car.photo, size: "200" %>
+    <%= link_to "See details", offers_path %>
+    <%= link_to "Order this package", orders_path, class: "btn btn-primary" %>
+    </p>
+  <% end %>
 </div>
