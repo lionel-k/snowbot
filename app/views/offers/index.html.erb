@@ -1,0 +1,25 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<%= @cars.length %>
+<!-- 29 -->
+
+<div class="container">
+  <div class="row">
+    <% @cars["cars"].each do |car|  %>
+      <div class="col-sm-4">
+        <div class="card-car" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= car['carThumbUrl'] %>');">
+          <div class="card-car-description">
+            <h2><%= car['carTitle'] %></h2>
+            <p><%= car['humanPrice'] %></p>
+          </div>
+          <%#= link_to "", cars_path(index), class: 'card-link' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
