@@ -1,5 +1,5 @@
 class Car
-  attr_accessor :id_drivy, :human_price, :car_title, :car_thumb_url
+  attr_accessor :id_drivy, :price, :title, :photo
 
   def initialize(attributes = {})
     @id_drivy = attributes[:id_drivy]
