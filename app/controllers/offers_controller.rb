@@ -39,30 +39,39 @@ class OffersController < ApplicationController
     # input: AvailabilityStart, AvailabilityEnd, distanceInKm, lat/lng of the domain, minBedrooms
     # output: 3 instances of object Flat
     best_domains = find_best_domains
+    checkin = "2017-12-28"
+    checkout = "2017-12-31"
+    guests_number = 3
+    flats = []
     best_domains.each do |domain|
-      # ...
+      flats << FetchHomeAwayService.new({checkin: checkin,
+        checkout: checkout,
+        guests_number: guests_number,
+        domain: domain})
     end
-    flat_1 = Flat.new(location: "16 rue de la neige #{best_domains[0].name}",
-      id_homeaway: 1111,
-      price_by_night: 123,
-      photo: "http://blog.paradizo.com/wp-content/uploads/2010/10/purple-ski-chalets.jpg",
-      domain: best_domains[0],
-      ratings: 4)
+    flats
 
-    flat_2 = Flat.new(location: "16 rue de la neige #{best_domains[1].name}",
-      id_homeaway: 222,
-      price_by_night: 222,
-      photo: "https://www.meribel-chalets-apartments.com/uploads/small/Meribel_Chalet_and_Apartment_rentals_-_homepage_1.jpg",
-      domain: best_domains[1],
-      ratings: 3)
+    # flat_1 = Flat.new(location: "16 rue de la neige #{best_domains[0].name}",
+    #   id_homeaway: 1111,
+    #   price_by_night: 123,
+    #   photo: "http://blog.paradizo.com/wp-content/uploads/2010/10/purple-ski-chalets.jpg",
+    #   domain: best_domains[0],
+    #   ratings: 4)
 
-    flat_3 = Flat.new(location: "16 rue de la neige #{best_domains[2].name}",
-      id_homeaway: 333,
-      price_by_night: 333,
-      photo: "https://www.consensiochalets.co.uk/wp-content/uploads/2016/08/Mont-Tremblant--960x540.jpg",
-      domain: best_domains[2],
-      ratings: 5)
-    [flat_1, flat_2, flat_3]
+    # flat_2 = Flat.new(location: "16 rue de la neige #{best_domains[1].name}",
+    #   id_homeaway: 222,
+    #   price_by_night: 222,
+    #   photo: "https://www.meribel-chalets-apartments.com/uploads/small/Meribel_Chalet_and_Apartment_rentals_-_homepage_1.jpg",
+    #   domain: best_domains[1],
+    #   ratings: 3)
+
+    # flat_3 = Flat.new(location: "16 rue de la neige #{best_domains[2].name}",
+    #   id_homeaway: 333,
+    #   price_by_night: 333,
+    #   photo: "https://www.consensiochalets.co.uk/wp-content/uploads/2016/08/Mont-Tremblant--960x540.jpg",
+    #   domain: best_domains[2],
+    #   ratings: 5)
+    # [flat_1, flat_2, flat_3]
   end
 
   def build_package
