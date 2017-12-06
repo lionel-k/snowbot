@@ -2,14 +2,11 @@ require 'json'
 require 'open-uri'
 
 class FetchDrivySearch
+  def initialize(attributes = {})
+    @attributes = attributes
+  end
 
-  def initialize( attributes = {
-  checkin: checkin,
-  checkout: checkout,
-  location: location,
-  address: address
-  })
-
+  def call
     base_url_search = 'https://www.drivy.com/search.json?'
 
     query_params = {
@@ -31,30 +28,21 @@ class FetchDrivySearch
     url_drivy = base_url_search + 'instant_bookable=yes'
 
     query_params.each do |k, v|
-      url_drivy += '&' + k.to_s + '=' + v
+      url_drivy += '&' + k.to_s + '=' + v.to_s
     end
 
     listings_serialized = open(url_drivy).read
     listings = JSON.parse(listings_serialized)
     available_cars = listings['cars']
+    best_rated_available_cars = available_cars.order('humanPrice asc').first(3)
 
-    best_rated_available_cars = []
-    available_cars.each do |car|
-      if car['humanPrice'].to_f < 200
-        best_rated_available_cars << car
-      end
+    best_rated_available_cars.each do |car|
+      Car.new(
+        id_drivy: car['id'],
+        price: car['humanPrice'],
+        title: car['carTitle'],
+        photo: car['carThumbUrl']
+      )
     end
-
-    car = best_rated_available_cars[0]
-
-    returned_car = Car.new(
-      id_drivy: car['id'],
-      price: car['humanPrice'],
-      title: car['carTitle'],
-      photo: car['carThumbUrl']
-    )
-
-    returned_car
-
   end
 end
