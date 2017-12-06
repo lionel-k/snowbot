@@ -3,9 +3,12 @@
   <% @offers.each do |offer| %>
     <h2>Offer <%= offer.id %></h2>
     <p><%= offer.flat.domain.name %>
-    <%= image_tag offer.flat.photo, size: "150" %>
-    <%= image_tag offer.car.photo, size: "200" %>
+    <%= image_tag offer.flat.photo, size: "150" %> <span><%= offer.flat.price_by_night %>€</span>
+    <%= image_tag offer.car.photo, size: "200" %> <span><%= offer.car.price %>€</span>
     <%= link_to "See details", offers_path %>
+  </p>
+  <p>Total: <%= offer.car.price + offer.flat.price_by_night %>€</p>
+  <p>
     <%= simple_form_for(@order)  do |f| %>
     <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
     <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car.photo } %>
