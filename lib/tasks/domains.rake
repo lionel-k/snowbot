@@ -6,6 +6,7 @@ namespace :domains do
   desc "Update domains"
   task :update_all => :environment do
     Domain.all.each do |domain|
+    # Domain.all.order(:id).limit(1).each do |domain|
     # domain = Domain.first
       p "--------------------------------------------------"
       p domain.name
@@ -26,12 +27,14 @@ namespace :domains do
           html_file_weather = open(url_weather).read
           html_doc_weather = Nokogiri::HTML(html_file_weather)
           p Date.new(Time.now.year, Time.now.month, Time.now.day)
-          html_doc_weather.search('.weather')[0...1].each do |element|
+          element = html_doc_weather.search('.weather')[0]
+
+          # html_doc_weather.search('.weather')[0...1].each do |element|
             condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
             p domain.is_sunny = condition
             p domain.is_sunny = condition == "sun"  ? true : false
             domain.save
-          end
+          # end
           p "- - - - - - - - - - - - - - - - - - - - - - -"
           html_doc_weather.search('.weather')[1..7].each do |element|
             condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
