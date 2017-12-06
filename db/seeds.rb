@@ -1,14 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
+Order.destroy_all
 Domain.destroy_all
 
 resorts = [
+morzine = Domain.create(name: "Morzine", name_url: "morzine", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+val_disere = Domain.create(name: "Val d'Isère", name_url: "val-disere", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+chamonix = Domain.create(name: "Chamonix", name_url: "chamonix", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+les_karellis = Domain.create(name: "Les Karellis", name_url: "les-karellis", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+les_menuires = Domain.create(name: "Les Menuires", name_url: "les-menuires", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 morzine = Domain.create(name: "Morzine", name_url: "morzine", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 val_disere = Domain.create(name: "Val d'Isère", name_url: "val-disere", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 chamonix = Domain.create(name: "Chamonix", name_url: "chamonix", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),

@@ -36,13 +36,13 @@ ActiveRecord::Schema.define(version: 20171205162511) do
     t.string "checkin"
     t.string "checkout"
     t.string "start_city"
-    t.string "drivy_data"
-    t.string "homeaway_data"
     t.bigint "domain_id"
     t.integer "total_price"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "drivy_data", default: "{}"
+    t.jsonb "homeaway_data", default: "{}"
     t.index ["domain_id"], name: "index_orders_on_domain_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
