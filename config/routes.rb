@@ -3,10 +3,13 @@ Rails.application.routes.draw do
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: 'pages#home'
   resources :offers, only: [:index]
-  resources :orders, only: [:index, :create]
-
+  
   require "sidekiq/web"
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
+
+  resources :orders, only: [:index, :create] do
+    resources :payments, only: [:new, :create]
+
   end
 end

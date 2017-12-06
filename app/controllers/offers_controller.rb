@@ -5,17 +5,17 @@ class OffersController < ApplicationController
 
   def index
     # 1. Search for cheapest cars on Drivy
-    @cars = search_cars
+    @cars = search_cars(params[:start_city])
     # 2. Update the weather conditions of all the domains
     # 3. Find the best domains from the input of the user
     # 4. For each of the best domains, find the cheapest flat
-    search_flats
+    @flats = search_flats(params[:mountain_chain], params[:checkin].first, params[:checkout].first, params[:guests_number])
     # 5. From the cars and the flats, create a package which a list of 3 offers
     @offers = build_package
     @order = Order.new
   end
 
-  def search_cars
+  def search_cars(start_city)
     # return the cheapest cars found on Drivy
     # input: location of the user, checkin at 8:00, checkout 20:00, distance: 2000kms, family car, instant booking
     # output: 3 instances of object Car
@@ -31,20 +31,18 @@ class OffersController < ApplicationController
     # for each domain, update domain.is_sunny, domain.snow_depth_low and domain.snow_depth_high
   end
 
-  def find_best_domains
+  def find_best_domains(mountain_chain)
     # return y domains where snow_depth_low > x
-    Domain.where("snow_depth_high > 100").order("snow_depth_high asc").first(3)
+    Domain.where("snow_depth_high > ? AND mountain_chain = ?", "20", mountain_chain).sample(3)
   end
 
-  def search_flats
+  def search_flats(mountain_chain, checkin, checkout, guests_number)
     # for all best domains, find the cheapest flat using the homeaway API
     # input: AvailabilityStart, AvailabilityEnd, distanceInKm, lat/lng of the domain, minBedrooms
     # output: 3 instances of object Flat
-    best_domains = find_best_domains
-    checkin = "2017-12-28"
-    checkout = "2017-12-31"
-    guests_number = 3
-    @flats = []
+    best_domains = find_best_domains(mountain_chain)
+
+    flats = []
     best_domains.each do |domain|
       service = FetchHomeAwayService.new(
         checkin: checkin,
@@ -58,31 +56,10 @@ class OffersController < ApplicationController
 
       flat.domain = domain
 
-      @flats << flat
+      flats << flat
     end
+    return flats
 
-    # flat_1 = Flat.new(location: "16 rue de la neige #{best_domains[0].name}",
-    #   id_homeaway: 1111,
-    #   price_by_night: 123,
-    #   photo: "http://blog.paradizo.com/wp-content/uploads/2010/10/purple-ski-chalets.jpg",
-    #   domain: best_domains[0],
-    #   ratings: 4)
-
-    # flat_2 = Flat.new(location: "16 rue de la neige #{best_domains[1].name}",
-    #   id_homeaway: 222,
-    #   price_by_night: 222,
-    #   photo: "https://www.meribel-chalets-apartments.com/uploads/small/Meribel_Chalet_and_Apartment_rentals_-_homepage_1.jpg",
-    #   domain: best_domains[1],
-    #   ratings: 3)
-
-    # flat_3 = Flat.new(location: "16 rue de la neige #{best_domains[2].name}",
-    #   id_homeaway: 333,
-    #   price_by_night: 333,
-    #   photo: "https://www.consensiochalets.co.uk/wp-content/uploads/2016/08/Mont-Tremblant--960x540.jpg",
-    #   domain: best_domains[2],
-    #   ratings: 5)
-
-    # @flats = [flat_1, flat_2, flat_3]
   end
 
   def build_package

@@ -70,11 +70,7 @@ les_rousses = Domain.create(name: "Les Rousses", location: "parking de l'orbe, 3
 # monts_jura = Domain.create(name: "Monts Jura", location: "435 rue des Monts Jura, 01410 Lélex", name_url: "monts-jura", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 ]
 
-
-
-
-
-
+puts "Seeds finished"
 
 
 
