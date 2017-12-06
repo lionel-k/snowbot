@@ -2,10 +2,10 @@ Order.destroy_all
 Domain.destroy_all
 
 resorts = [
-morzine = Domain.create(name: "Morzine", location: "26 Pl. du Baraty, 74110 Morzine", name_url: "morzine", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+# morzine = Domain.create(name: "Morzine", location: "26 Pl. du Baraty, 74110 Morzine", name_url: "morzine", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # val_disere = Domain.create(name: "Val d'Isère", location: "Place Jacques Mouflier, 73150 Val-d'Isère", name_url: "val-disere", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
-# chamonix = Domain.create(name: "Chamonix", location: "85 Place du Triangle de l'Amitié, 74400 Chamonix-Mont-Blanc", name_url: "chamonix", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
-# les_karellis = Domain.create(name: "Les Karellis", location: "Le Forum, Les Karellis, 73870 Montricher-Albanne", name_url: "les-karellis", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+chamonix = Domain.create(name: "Chamonix", location: "85 Place du Triangle de l'Amitié, 74400 Chamonix-Mont-Blanc", name_url: "chamonix", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+les_karellis = Domain.create(name: "Les Karellis", location: "Le Forum, Les Karellis, 73870 Montricher-Albanne", name_url: "les-karellis", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # les_menuires = Domain.create(name: "Les Menuires", location: "Immeuble Belledone, 73440 Saint-Martin-de-Belleville", name_url: "les-menuires", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # meribel = Domain.create(name: "Méribel", location: "Route du centre, 73550 Meribel", name_url: "meribel", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # avoriaz = Domain.create(name: "Avoriaz", location: "44 Prom. du Festival, 74110 Avoriaz", name_url: "avoriaz", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
@@ -30,11 +30,11 @@ morzine = Domain.create(name: "Morzine", location: "26 Pl. du Baraty, 74110 Morz
 # saint_francois_longchamp = Domain.create(name: "Saint François Longchamp", location: "Maison du tourisme, 73130 Saint-François-Longchamp", name_url: "saint-francois-longchamp", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # combloux = Domain.create(name: "Combloux", location: "49 Chemin des Passerands, 74920 Combloux", name_url: "combloux", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # les_7_laux = Domain.create(name: "Les 7 Laux", location: "Centre des Cortillets, 38190 Prapoutel - Les 7 Laux", name_url: "les-7-laux", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
-# les_carroz = Domain.create(name: "Les Carroz", location: "9 Place de l'Ambiance, 74300 Arâches-la-Frasse", name_url: "les-carroz", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
-# saint_martin_de_belleville = Domain.create(name: "Saint Martin de Belleville", location: "Place de l'Église, 73440 Saint-Martin-de-Belleville", name_url: "saint-martin-de-belleville", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
-valmorel = Domain.create(name: "Valmorel", location: "25 Bourg Morel, 73260 Les Avanchers-Valmorel", name_url: "valmorel", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+les_carroz = Domain.create(name: "Les Carroz", location: "9 Place de l'Ambiance, 74300 Arâches-la-Frasse", name_url: "les-carroz", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
+# saint_martin_de_belleville = Domain.create(name: "Saint Martin de Belleville", location: "Place de l'Église, 73440 Saint-Martin-de-Belleville", name_url: "saint-martin-de-belleville", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
+# valmorel = Domain.create(name: "Valmorel", location: "25 Bourg Morel, 73260 Les Avanchers-Valmorel", name_url: "valmorel", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
-vars = Domain.create(name: "Vars", location: "Cours Fontanarosa, 05560 Vars", name_url: "vars", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+#vars = Domain.create(name: "Vars", location: "Cours Fontanarosa, 05560 Vars", name_url: "vars", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # isola_2000 = Domain.create(name: "Isola 2000", location: "Immeuble Le Pélevos, 06420 Isola 2000", name_url: "isola-2000", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # la_grave_la_meije = Domain.create(name: "La Grave la Meije", location: "Place de l'Église 05320 La Grave", name_url: "la-grave-la-meije", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # sauze_supersauze = Domain.create(name: "Sauze Super Sauze", location: "Le Sauze, 04400 Le Sauze", name_url: "sauze-supersauze", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
@@ -48,7 +48,7 @@ vars = Domain.create(name: "Vars", location: "Cours Fontanarosa, 05560 Vars", na
 # orcieres = Domain.create(name: "Orcières Merlette", location: "Rue des Ecrins, 05170 Merlette, Orcières", name_url: "orcieres", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # auron = Domain.create(name: "Auron", location: "Grange Cossa, Avenue de Malhira, 06660 Saint-Étienne-de-Tinée", name_url: "auron", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
-la_mongie_bareges = Domain.create(name: "Grand Tourmalet (La Mongie / Barèges)", location: "Rue du Pic d'Espade, 65200 Mongie (La)", name_url: "la-mongie-bareges", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+#la_mongie_bareges = Domain.create(name: "Grand Tourmalet (La Mongie / Barèges)", location: "Rue du Pic d'Espade, 65200 Mongie (La)", name_url: "la-mongie-bareges", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # peyragudes = Domain.create(name: "Peyragudes", location: "Résidence Royal Peyragudes, 65240 Germ", name_url: "peyragudes", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # saint_lary_soulan = Domain.create(name: "Saint Lary Soulan", location: "Rue de Soulan, 65170 Saint Lary Village", name_url: "saint-lary-soulan", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # piau_engaly = Domain.create(name: "Piau Engaly", location: "308 Montagne de Batsegure, 65170 Aragnouet", name_url: "piau-engaly", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
@@ -56,17 +56,17 @@ la_mongie_bareges = Domain.create(name: "Grand Tourmalet (La Mongie / Barèges)"
 # eyne_cambre_daze = Domain.create(name: "Espace Cambre d’Aze", location: "Mairie, 66210 Saint-Pierre-dels-Forçats", name_url: "eyne-cambre-daze", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # les_angles = Domain.create(name: "Les Angles", location: "Avenue de l'Aude, 66210 Les Angles", name_url: "les-angles", mountain_chain: "pyrenees", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
-la_croix_de_bauzon = Domain.create(name: "La Croix de Bauzon", location: "Station de la Croix de Bauzon, Borne", name_url: "la-croix-de-bauzon", mountain_chain: "massif-central", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+#la_croix_de_bauzon = Domain.create(name: "La Croix de Bauzon", location: "Station de la Croix de Bauzon, Borne", name_url: "la-croix-de-bauzon", mountain_chain: "massif-central", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # le_lioran = Domain.create(name: "Le Lioran", location: "Place du Téléphérique, 15300 Laveissière", name_url: "le-lioran", mountain_chain: "massif-central", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # mont_aigoual = Domain.create(name: "Prat Peyrot - Mont Aigoual", location: "Prat Peyrot, 30570 Valleraugue", name_url: "mont-aigoual", mountain_chain: "massif-central", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # besse_super_besse = Domain.create(name: "Besse Super Besse", location: "Rond-Point des Pistes, 63610 Besse-et-Saint-Anastaise", name_url: "besse-super-besse", mountain_chain: "massif-central", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
-le_ballon_dalsace = Domain.create(name: "Le Ballon d'Alsace", location: "5 Gr Grand Rue, 68290 Sewen", name_url: "le-ballon-dalsace", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
+#le_ballon_dalsace = Domain.create(name: "Le Ballon d'Alsace", location: "5 Gr Grand Rue, 68290 Sewen", name_url: "le-ballon-dalsace", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil),
 # gerardmer = Domain.create(name: "Gérardmer", location: "239 Chemin de la Rayée, 88400 Gérardmer", name_url: "gerardmer", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # la_bresse_hohneck = Domain.create(name: "La Bresse Hohneck", location: "88 Route de Vologne, 88250 La Bresse", name_url: "la-bresse-hohneck", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
 # metabief_mont_dor = Domain.create(name: "Métabief Mont d'Or", location: "16 Rue du Village, 25370 Métabief", name_url: "metabief-mont-dor", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
-les_rousses = Domain.create(name: "Les Rousses", location: "parking de l'orbe, 39220 Les Rousses", name_url: "les-rousses", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
+#les_rousses = Domain.create(name: "Les Rousses", location: "parking de l'orbe, 39220 Les Rousses", name_url: "les-rousses", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 # monts_jura = Domain.create(name: "Monts Jura", location: "435 rue des Monts Jura, 01410 Lélex", name_url: "monts-jura", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 ]
 
