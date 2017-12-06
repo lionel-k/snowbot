@@ -1,7 +1,5 @@
 require 'json'
 require 'open-uri'
-require 'pry-byebug'
-require_relative '../../app/models/car.rb'
 
 class FetchDrivySearch
 
