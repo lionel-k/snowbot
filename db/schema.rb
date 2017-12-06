@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206113322) do
+ActiveRecord::Schema.define(version: 20171206150745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20171206113322) do
     t.datetime "updated_at", null: false
     t.jsonb "drivy_data", default: "{}"
     t.jsonb "homeaway_data", default: "{}"
+    t.integer "amount_cents", default: 0, null: false
+    t.jsonb "payment"
     t.index ["domain_id"], name: "index_orders_on_domain_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
