@@ -1,3 +1,5 @@
+# require_relative "../../app/services/fetch_homeaway_service.rb"
+
 class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
@@ -7,7 +9,7 @@ class OffersController < ApplicationController
     # 2. Update the weather conditions of all the domains
     # 3. Find the best domains from the input of the user
     # 4. For each of the best domains, find the cheapest flat
-    @flats = search_flats
+    search_flats
     # 5. From the cars and the flats, create a package which a list of 3 offers
     @offers = build_package
     @order = Order.new
@@ -42,14 +44,22 @@ class OffersController < ApplicationController
     checkin = "2017-12-28"
     checkout = "2017-12-31"
     guests_number = 3
-    flats = []
+    @flats = []
     best_domains.each do |domain|
-      flats << FetchHomeAwayService.new({checkin: checkin,
+      service = FetchHomeAwayService.new(
+        checkin: checkin,
         checkout: checkout,
         guests_number: guests_number,
-        domain: domain})
+        domain: domain
+      )
+
+      flat = service.call
+      next unless flat
+
+      flat.domain = domain
+
+      @flats << flat
     end
-    flats
 
     # flat_1 = Flat.new(location: "16 rue de la neige #{best_domains[0].name}",
     #   id_homeaway: 1111,
@@ -71,14 +81,15 @@ class OffersController < ApplicationController
     #   photo: "https://www.consensiochalets.co.uk/wp-content/uploads/2016/08/Mont-Tremblant--960x540.jpg",
     #   domain: best_domains[2],
     #   ratings: 5)
-    # [flat_1, flat_2, flat_3]
+
+    # @flats = [flat_1, flat_2, flat_3]
   end
 
   def build_package
     # With a given set of cars and flats, return an array of [car, flat]
     offer_1 = Offer.new(id: 1, car: @cars[0], flat: @flats[0])
     offer_2 = Offer.new(id: 2, car: @cars[1], flat: @flats[1])
-    offer_3 = Offer.new(id: 3, car: @cars[2], flat: @flats[2])
-    [offer_1, offer_2, offer_3]
+    # offer_3 = Offer.new(id: 3, car: @cars[2], flat: @flats[2])
+    [offer_1, offer_2]
   end
 end
