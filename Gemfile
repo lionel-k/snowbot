@@ -16,10 +16,14 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-
 gem "geocoder"
 
+# Facebook Login
 gem 'omniauth-facebook'
+
+# STRIPE
+gem 'money-rails'
+gem 'stripe'
 
 group :development, :test do
   gem 'pry-byebug'
