@@ -24,24 +24,17 @@ class OffersController < ApplicationController
     # car_3 = Car.new(id_drivy: 3333, price: 550, title: "Peugeot 506", photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLtIbhO-iU4WnsUVcoUaW9nAR_DXniTpqUSHKQsfn1NsV7Pk48")
     # return [car_1, car_2, car_3]
 
-    address = "12 rue du petit Bac Paris"
+    address = "12+Rue+du+Bac+Paris+France"
     checkin = "2017-12-28"
     checkout = "2017-12-31"
-    location = "Paris"
     @cars = []
 
     search = FetchDrivySearch.new(
         checkin: checkin,
         checkout: checkout,
-        guests_number: guests_number,
-        domain: domain
+        address: address
       )
-
     @cars = search.call
-    end
-
-
-
   end
 
   def update_weather_conditions
