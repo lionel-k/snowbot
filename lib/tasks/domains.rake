@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'nokogiri'
-require 'pry-byebug'
 
 namespace :domains do
   desc "Update domains"
