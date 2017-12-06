@@ -1,27 +1,26 @@
 <!-- <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p> -->
+  <p>Find me in app/views/pages/home.html.erb</p> -->
 
-<div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
-      <div class="banner-content">
-        <h1>FIND YOUR SKI TRIP</h1>
-        <p>SnowBot finds for you the right package that fit your need!</p>
-        <form action="#" class="form-inline">
-          <input type="text" class="form-control input-lg" placeholder="My Start point">
-          <input type="text" class="form-control input-lg" placeholder="Mountains">
-          <input type="text" class="form-control input-lg" placeholder="checkin">
-          <input type="text" class="form-control input-lg" placeholder="checkout">
-          <select name="" id="" class="form-control input-lg">
-            <option value="1">1 person</option>
-            <option value="2">2 persons</option>
-            <option value="3">3 persons</option>
-            <option value="4">4 persons</option>
-            <option value="5">5 persons</option>
-          </select>
-         <!--   <input type="submit" class="btn btn-primary btn-lg" formaction="../map/map.html" value="Search" >  --><br /><br />
-       <button class="btn"><img src="<%= image_path "messenger.png" %>" alt=""> Start Chat in Messenger</button>
-        </form>
-      </div>
+  <div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
+    <div class="banner-content">
+      <h1>FIND YOUR SKI TRIP</h1>
+      <p>SnowBot finds for you the right package that fit your need!</p>
+
+      <%= form_tag offers_path, method: :get, class: 'form-inline' do %>
+        <%= text_field_tag 'start_city', nil, class: "form-control text-center", placeholder: "Start Address", autofocus: true %>
+        <%= select_tag 'mountain_chain', options_for_select(
+        Domain.select(:mountain_chain).map(&:mountain_chain).uniq
+        ),
+        class: "form-control text-center",
+          placeholder: "Mountain" %>
+        <%= date_field 'checkin', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkin" %>
+        <%= date_field 'checkout', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkout" %>
+        <%= select_tag 'guests_number', options_for_select([['1'], ['2'], ['3'], ['4'], ['5']]), class: "form-control text-center unselected", id: 'guest', prompt: "Guests" %>
+        <%= submit_tag "Start chat in Messenger", class: "btn home-btn" %>
+      <% end %>
+
     </div>
+  </div>
 
   <div class="container">
     <h2 class="text-center">What a hell is SnowBot?</h2>
@@ -35,19 +34,19 @@
   <div class="wrapper-grey">
     <div class="container">
       <h2 class="text-center">What is your next trip?</h2>
-          <!-- Code your cards  here -->
+      <!-- Code your cards  here -->
       <div class="row">
         <!-- design one card first -->
         <div class="col-xs-12 col-sm-4">
           <div class="card">
             <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "tignes-pic.jpg" %>');">
-                <div class="card-category">Resort</div>
-                <div class="card-description">
-                  <h2>Tignes</h2>
-                  <p>One of the biggest Resort</p>
-                </div>
-                <!-- <img class="card-avatar avatar_sm" src='images/tignes-logo.jpg'> -->
-                <a class="card-listing-link" href="../listing/listing.html"></a>
+              <div class="card-category">Resort</div>
+              <div class="card-description">
+                <h2>Tignes</h2>
+                <p>One of the biggest Resort</p>
+              </div>
+              <!-- <img class="card-avatar avatar_sm" src='images/tignes-logo.jpg'> -->
+              <a class="card-listing-link" href="../listing/listing.html"></a>
             </div>
             <div class="card-footer">
               <div class="card-date">
@@ -63,14 +62,14 @@
 
         <div class="col-xs-12 col-sm-4">
           <div class="card">
-        <!-- design one card first -->
+            <!-- design one card first -->
             <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "espace-drivy.jpg" %>');">
-                <div class="card-category">Transport</div>
-                <div class="card-description">
-                  <h2>Renault Espace</h2>
-                  <p>Top for long distance trip</p>
-                </div>
-                <!-- <img class="card-avatar avatar_sm" src='images/gab.png'> -->
+              <div class="card-category">Transport</div>
+              <div class="card-description">
+                <h2>Renault Espace</h2>
+                <p>Top for long distance trip</p>
+              </div>
+              <!-- <img class="card-avatar avatar_sm" src='images/gab.png'> -->
             </div>
             <div class="card-footer">
               <div class="card-date">
@@ -86,14 +85,14 @@
 
         <div class="col-xs-12 col-sm-4">
           <div class="card">
-        <!-- design one card first -->
+            <!-- design one card first -->
             <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "tignes-flat.jpg" %>');">
-                <div class="card-category">Housing</div>
-                <div class="card-description">
-                  <h2>Very nice 2 Bedrooms flat</h2>
-                  <p>Charming flat in Val Claret, lifts 1 min away</p>
-                </div>
-                <!-- <img class="card-avatar avatar_sm" src='images/cecile.png'> -->
+              <div class="card-category">Housing</div>
+              <div class="card-description">
+                <h2>Very nice 2 Bedrooms flat</h2>
+                <p>Charming flat in Val Claret, lifts 1 min away</p>
+              </div>
+              <!-- <img class="card-avatar avatar_sm" src='images/cecile.png'> -->
             </div>
             <div class="card-footer">
               <div class="card-date">
@@ -111,52 +110,52 @@
   </div>
 
 
-      <div class="container text-center padded features">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img src="<%= image_path "lift.png" %>" alt="">
+  <div class="container text-center padded features">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <img src="<%= image_path "lift.png" %>" alt="">
 
-            <br><br />
-            <h2>Discover a new French Resort</h2>
-            <p>We find the best resort for your trip</p>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img src="<%= image_path "snow.png" %>" alt="">
-            <br><br />
-            <h2>We track the ski resorts weather</h2>
-            <p>We find for you the best Snow Depths and weather condition for your trip</p>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img src="<%= image_path "car.png" %>" alt="">
-            <br><br />
-            <h2>We find you a car</h2>
-            <p>We track car rental in the sharing economy so that you have the best transportation deal</p>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img src="<%= image_path "home.png" %>" alt="">
-            <br><br />
-            <h2>SnowBot finds you the right flat for your team</h2>
-            <p>We search for you the best deal for your crew within the sharing economy offering</p>
-          </div>
-        </div>
+        <br><br />
+        <h2>Discover a new French Resort</h2>
+        <p>We find the best resort for your trip</p>
       </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <img src="<%= image_path "snow.png" %>" alt="">
+        <br><br />
+        <h2>We track the ski resorts weather</h2>
+        <p>We find for you the best Snow Depths and weather condition for your trip</p>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <img src="<%= image_path "car.png" %>" alt="">
+        <br><br />
+        <h2>We find you a car</h2>
+        <p>We track car rental in the sharing economy so that you have the best transportation deal</p>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <img src="<%= image_path "home.png" %>" alt="">
+        <br><br />
+        <h2>SnowBot finds you the right flat for your team</h2>
+        <p>We search for you the best deal for your crew within the sharing economy offering</p>
+      </div>
+    </div>
+  </div>
 
   <div class="wrapper-grey">
     <div class="container">
       <h2 class="text-center">What is your next trip?</h2>
-          <!-- Code your cards  here -->
+      <!-- Code your cards  here -->
       <div class="row">
         <!-- design one card first -->
         <div class="col-xs-12 col-sm-4">
           <div class="card">
             <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "les arcs.jpg" %>');">
-                <div class="card-category">Resort</div>
-                <div class="card-description">
-                  <h2>Les Arcs</h2>
-                  <p>One of the best Resort</p>
-                </div>
-                <!-- <img class="card-avatar avatar_sm" src='images/tignes-logo.jpg'> -->
-                <a class="card-listing-link" href="../listing/listing.html"></a>
+              <div class="card-category">Resort</div>
+              <div class="card-description">
+                <h2>Les Arcs</h2>
+                <p>One of the best Resort</p>
+              </div>
+              <!-- <img class="card-avatar avatar_sm" src='images/tignes-logo.jpg'> -->
+              <a class="card-listing-link" href="../listing/listing.html"></a>
             </div>
             <div class="card-footer">
               <div class="card-date">
@@ -172,14 +171,14 @@
 
         <div class="col-xs-12 col-sm-4">
           <div class="card">
-        <!-- design one card first -->
+            <!-- design one card first -->
             <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "c3picasso.jpg" %>');">
-                <div class="card-category">Transport</div>
-                <div class="card-description">
-                  <h2>C3 Picasso</h2>
-                  <p>Very confortable</p>
-                </div>
-                <!-- <img class="card-avatar avatar_sm" src='images/gab.png'> -->
+              <div class="card-category">Transport</div>
+              <div class="card-description">
+                <h2>C3 Picasso</h2>
+                <p>Very confortable</p>
+              </div>
+              <!-- <img class="card-avatar avatar_sm" src='images/gab.png'> -->
             </div>
             <div class="card-footer">
               <div class="card-date">
@@ -195,14 +194,14 @@
 
         <div class="col-xs-12 col-sm-4">
           <div class="card">
-        <!-- design one card first -->
+            <!-- design one card first -->
             <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "flat-les-arcs.jpg" %>');">
-                <div class="card-category">Housing</div>
-                <div class="card-description">
-                  <h2>Very nice flat in a chalet</h2>
-                  <p>Veryu cosy flat in Arcs 1950, at the center of the resort</p>
-                </div>
-                <!-- <img class="card-avatar avatar_sm" src='images/cecile.png'> -->
+              <div class="card-category">Housing</div>
+              <div class="card-description">
+                <h2>Very nice flat in a chalet</h2>
+                <p>Veryu cosy flat in Arcs 1950, at the center of the resort</p>
+              </div>
+              <!-- <img class="card-avatar avatar_sm" src='images/cecile.png'> -->
             </div>
             <div class="card-footer">
               <div class="card-date">
@@ -219,22 +218,22 @@
     </div>
   </div>
 
-    <!-- Your newsletter code -->
-    <div class="text-center padded" id="newsletter">
-      <h2>Get news from us</h2>
-      <p>Leave us your mail and get news from us</p>
-      <form class="form-inline">
-        <input type="email" placeholder="bob@gmail.com" class="form-control">
-        <input type="submit" value="Subscribe" class="btn btn-primary">
-      </form>
-    </div>
+  <!-- Your newsletter code -->
+  <div class="text-center padded" id="newsletter">
+    <h2>Get news from us</h2>
+    <p>Leave us your mail and get news from us</p>
+    <form class="form-inline">
+      <input type="email" placeholder="bob@gmail.com" class="form-control">
+      <input type="submit" value="Subscribe" class="btn btn-primary">
+    </form>
+  </div>
 
-    <!-- Your map code -->
-    <div id="map" style="width: 100%;height: 500px;"></div>
+  <!-- Your map code -->
+  <div id="map" style="width: 100%;height: 500px;"></div>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
     var myLatlng = new google.maps.LatLng(48.865088,2.379843);
     var myOptions = {
       zoom: 16,
@@ -249,8 +248,8 @@
       map: map,
       title:"You are here!"
     });
-    </script>
+  </script>
 
-    <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

@@ -5,17 +5,17 @@ class OffersController < ApplicationController
 
   def index
     # 1. Search for cheapest cars on Drivy
-    @cars = search_cars
+    @cars = search_cars(params[:start_city])
     # 2. Update the weather conditions of all the domains
     # 3. Find the best domains from the input of the user
     # 4. For each of the best domains, find the cheapest flat
-    @flats = search_flats
+    @flats = search_flats(params[:mountain_chain], params[:checkin].first, params[:checkout].first, params[:guests_number])
     # 5. From the cars and the flats, create a package which a list of 3 offers
     @offers = build_package
     @order = Order.new
   end
 
-  def search_cars
+  def search_cars(start_city)
     # return the cheapest cars found on Drivy
     # input: location of the user, checkin at 8:00, checkout 20:00, distance: 2000kms, family car, instant booking
     # output: 3 instances of object Car
@@ -31,19 +31,17 @@ class OffersController < ApplicationController
     # for each domain, update domain.is_sunny, domain.snow_depth_low and domain.snow_depth_high
   end
 
-  def find_best_domains
+  def find_best_domains(mountain_chain)
     # return y domains where snow_depth_low > x
-    Domain.where("snow_depth_high > 60").sample(3)
+    Domain.where("snow_depth_high > ? AND mountain_chain = ?", "20", mountain_chain).sample(3)
   end
 
-  def search_flats
+  def search_flats(mountain_chain, checkin, checkout, guests_number)
     # for all best domains, find the cheapest flat using the homeaway API
     # input: AvailabilityStart, AvailabilityEnd, distanceInKm, lat/lng of the domain, minBedrooms
     # output: 3 instances of object Flat
-    best_domains = find_best_domains
-    checkin = "2017-12-28"
-    checkout = "2017-12-31"
-    guests_number = 3
+    best_domains = find_best_domains(mountain_chain)
+
     flats = []
     best_domains.each do |domain|
       service = FetchHomeAwayService.new(

@@ -37,7 +37,7 @@ class FetchHomeAwayService
 
     best_rated_available_flats = []
     available_flats.each do |flat|
-      if flat['reviewAverage'].to_f >= 4
+      if flat['reviewAverage'].to_f >= 4 || flat['priceQuote']['averageNightly'] > 100
         best_rated_available_flats << flat
       end
     end
