@@ -12,13 +12,17 @@ class OrdersController < ApplicationController
     @order.domain = Domain.find(params[:order][:domain])
     @order.drivy_data = { price: car_price, photo: car_photo }
     @order.homeaway_data = { price: flat_price, photo: flat_photo }
-    @order.total_price = car_price + flat_price
-    @order.status = "Paid"
-    if @order.save
-      render :index
-    else
-      redirect_to offers_path
-    end
+    # total_price = (car_price + flat_price) * 100
+    @order.amount = car_price + flat_price
+    @order.status = "pending"
+    @order.save
+    redirect_to new_order_payment_path(@order)
+
+    # if @order.save
+    #   render :index
+    # else
+    #   redirect_to offers_path
+    # end
   end
 
   private
@@ -27,15 +31,3 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:car_price, :car_photo, :flat_price, :flat_photo)
   end
 end
-
-
-    # t.bigint "user_id"
-    # t.integer "guests_number"
-    # t.string "checkin"
-    # t.string "checkout"
-    # t.string "start_city"
-    # t.string "drivy_data"
-    # t.string "homeaway_data"
-    # t.bigint "domain_id"
-    # t.integer "total_price"
-    # t.string "status"
