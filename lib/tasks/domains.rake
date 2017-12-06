@@ -44,8 +44,3 @@ namespace :domains do
     end
   end
 end
-
-
-
-
-

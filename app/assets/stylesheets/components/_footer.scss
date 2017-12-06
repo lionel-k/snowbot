@@ -1,7 +1,15 @@
 #footer {
   background: #333333;
-  padding: 10px 0;
+  padding: 10px 0px;
   color: #CCCCCC;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #footer p {

@@ -49,7 +49,7 @@ class FetchHomeAwayService
 
     flat = best_rated_available_flats[0]
 
-    returned_flat = Flat.new(
+    Flat.new(
       id_homeaway: flat['listingId'],
       location: flat['location']['city'],
       domain: 'Megève',
@@ -57,9 +57,6 @@ class FetchHomeAwayService
       ratings: flat['reviewAverage'],
       photo: flat['thumbnail']['secureUri']
     )
-
-    returned_flat
-
   end
 
 
