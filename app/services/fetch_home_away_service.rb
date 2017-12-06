@@ -17,7 +17,7 @@ class FetchHomeAwayService
       minSleeps: @attributes[:guests_number],
       centerPointLongitude: @attributes[:domain].longitude,
       centerPointLatitude: @attributes[:domain].latitude,
-      distanceInKm: '3',
+      distanceInKm: '20',
       availabilityStart: @attributes[:checkin],
       availabilityEnd: @attributes[:checkout],
       reservation_en_ligne: 'Instant book',
@@ -37,15 +37,15 @@ class FetchHomeAwayService
 
     best_rated_available_flats = []
     available_flats.each do |flat|
-      if flat['reviewAverage'].to_f > 4
+      if flat['reviewAverage'].to_f >= 4
         best_rated_available_flats << flat
       end
     end
 
-    flat = best_rated_available_flats.last
+    flat = best_rated_available_flats.first
     return unless flat
 
-    Flat.new(
+    f = Flat.new(
       id_homeaway: flat['listingId'],
       location: flat['location']['city'],
       price_by_night: flat['priceQuote']['averageNightly'],
