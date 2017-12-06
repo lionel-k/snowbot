@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :offers, only: [:index]
   resources :orders, only: [:index, :create]
+
+  require "sidekiq/web"
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
