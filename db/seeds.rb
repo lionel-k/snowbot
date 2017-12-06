@@ -35,6 +35,8 @@ saint_martin_de_belleville = Domain.create(name: "Saint Martin de Belleville", l
 valmorel = Domain.create(name: "Valmorel", location: "25 Bourg Morel, 73260 Les Avanchers-Valmorel", name_url: "valmorel", mountain_chain: "alpes-du-nord", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 ]
 
+puts "Seeds finished"
+
 
 vars = Domain.create(name: "Vars", location: "Cours Fontanarosa, 05560 Vars", name_url: "vars", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 isola_2000 = Domain.create(name: "Isola 2000", location: "Immeuble Le Pélevos, 06420 Isola 2000", name_url: "isola-2000", mountain_chain: "alpes-du-sud", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
