@@ -19,6 +19,8 @@ gem 'uglifier'
 
 gem "geocoder"
 
+gem 'omniauth-facebook'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
