@@ -17,6 +17,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem "geocoder"
+gem "facebook-messenger"
 
 # Facebook Login
 gem 'omniauth-facebook'

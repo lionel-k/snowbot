@@ -12,6 +12,7 @@ require "action_cable/engine"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -34,5 +35,9 @@ module Snowbot
     config.generators.system_tests = nil
 
     config.active_job.queue_adapter = :sidekiq
+
+    # require bot files
+    config.paths.add File.join('app', 'bot'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'bot', '*')]
   end
 end
