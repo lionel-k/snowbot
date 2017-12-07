@@ -33,7 +33,7 @@ class OffersController < ApplicationController
 
   def find_best_domains(mountain_chain)
     # return y domains where snow_depth_low > x
-    Domain.where("snow_depth_high > ? AND mountain_chain = ?", "20", mountain_chain).sample(3)
+    Domain.where("snow_depth_low > ? AND mountain_chain = ?", "30", mountain_chain).sample(3)
   end
 
   def search_flats(mountain_chain, checkin, checkout, guests_number)
