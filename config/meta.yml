@@ -1,0 +1,10 @@
+meta_product_name: "SnowBot AI"
+meta_title: "SnowBot AI - Ski trip organizer"
+meta_description: "A bot allowing users to instantaneously see product packs from various platforms to go on ski trip without spending ages in search & compare mission.
+Meet SnowBot, tell him your trip dates and number of participants.
+You will get the full package:
+- ski resort with weather checking,
+- housing,
+- car."
+meta_image: "background.jpg"                       # should exist in `app/assets/images/`
+twitter_account: "@snowbot_twitter_account"   # required for Twitter Cards
