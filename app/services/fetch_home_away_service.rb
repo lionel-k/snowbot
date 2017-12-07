@@ -17,7 +17,7 @@ class FetchHomeAwayService
       minSleeps: @attributes[:guests_number],
       centerPointLongitude: @attributes[:domain].longitude,
       centerPointLatitude: @attributes[:domain].latitude,
-      distanceInKm: '20',
+      distanceInKm: '1',
       availabilityStart: @attributes[:checkin],
       availabilityEnd: @attributes[:checkout],
       reservation_en_ligne: 'Instant book',
