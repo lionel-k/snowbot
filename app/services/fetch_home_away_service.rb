@@ -48,7 +48,7 @@ class FetchHomeAwayService
     f = Flat.new(
       id_homeaway: flat['listingId'],
       location: flat['location']['city'],
-      price_by_night: flat['priceQuote']['averageNightly'],
+      price_by_night: flat['priceQuote']['averageNightly'].to_f.ceil,
       ratings: flat['reviewAverage'],
       photo: flat['thumbnail']['secureUri']
     )
