@@ -1,9 +1,8 @@
-# require_relative "../../app/services/fetch_homeaway_service.rb"
-
 class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
+
     @mountain_chain = params[:mountain_chain]
     @guests_number = params[:guests_number]
     @checkin = Date.parse(params[:checkin].first)
@@ -64,7 +63,6 @@ class OffersController < ApplicationController
 
   def build_package
     @diff_days = @checkout.mjd - @checkin.mjd
-
     offers = []
     @flats.each_with_index do |flat, index|
       offer = Offer.new(id: index, car: @cars[index], flat: @flats[index])
