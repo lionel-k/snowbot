@@ -2,7 +2,7 @@
   background: #333333;
   padding: 10px 0px;
   color: #CCCCCC;
-  position: fixed;
+  // position: fixed;
   left: 0px;
   bottom: 0px;
   height: 100px;
@@ -13,10 +13,17 @@
 }
 
 #footer p {
-  margin-top: 17px;
+  margin-top: 30px;
+  align-items: center;
+  font-size: 12px;
+  text-align: center;
 }
 #footer ul {
+  display: inline-block;
+  padding: 10px;
   margin-top: 10px;
+  font-size:10px;
+  text-align: center;
 }
 #footer a {
   color: #CCCCCC;
@@ -27,3 +34,5 @@
 #footer a:hover{
   color: rgba(80, 185, 249, 1);
 }
+
+
