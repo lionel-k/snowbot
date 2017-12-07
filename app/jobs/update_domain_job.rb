@@ -30,14 +30,15 @@ class UpdateDomainJob < ApplicationJob
       condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
       p domain.is_sunny = condition
       p domain.is_sunny = condition == "sun"  ? true : false
-      domain.save
     end
-    p "- - - - - - - - - - - - - - - - - - - - - - -"
-    html_doc_weather.search('.weather')[1..7].each do |element|
-      condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
-      p domain.forecast_data = condition
-      p domain.forecast_data = condition == "sun"  ? true : false
-      domain.save
-    end
+
+    domain.save
+    # p "- - - - - - - - - - - - - - - - - - - - - - -"
+    # html_doc_weather.search('.weather')[1..7].each do |element|
+    #   condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
+    #   p domain.forecast_data = condition
+    #   p domain.forecast_data = condition == "sun"  ? true : false
+    #   domain.save
+    # end
   end
 end
