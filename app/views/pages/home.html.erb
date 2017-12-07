@@ -6,7 +6,7 @@
       <h1>FIND YOUR SKI TRIP</h1>
       <p>SnowBot finds for you the right package that fit your need!</p>
 
-      <%= form_tag offers_path, method: :get, class: 'form-inline' do %>
+      <%= form_tag offers_path, method: :get, class: 'form-inline form-banner' do %>
         <%= text_field_tag 'start_city', nil, class: "form-control text-center", placeholder: "Start Address", autofocus: true %>
         <%= select_tag 'mountain_chain', options_for_select(
         Domain.select(:mountain_chain).map(&:mountain_chain).uniq
