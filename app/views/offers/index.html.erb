@@ -1,10 +1,12 @@
 <div class="container">
   <h1>Offers found for you</h1>
   <p>
-    <span>From <%= @checkin.strftime("%A, %b %d") %></span>
+    <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
     to
-    <span><%= @checkout.strftime("%A, %b %d") %></span> <span>
-    (<%= "#{@diff_days}"%> <%= 'night'.pluralize %></span> )
+    <span><strong><%= @checkout.strftime("%A, %b %d") %></strong></span>
+    <span>
+    (<%= "#{@diff_days}"%> <%= 'night'.pluralize %>
+    </span> )
   </p>
 
   <hr>
@@ -17,7 +19,7 @@
     <span><%=  %></span>
     <%= image_tag offer.car.photo, size: "200" %> <span><%= offer.car.price %>€</span>
   </p>
-  <p>Total: <%= offer.total_price %>€</p>
+  <p><strong>Total: <%= offer.total_price %>€</strong></p>
   <p>
     <%= simple_form_for(@order)  do |f| %>
     <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
