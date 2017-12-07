@@ -15,23 +15,22 @@ class OffersController < ApplicationController
     @order = Order.new
   end
 
-  def search_cars(start_city)
+  def search_cars(address)
     # return the cheapest cars found on Drivy
     # input: location of the user, checkin at 8:00, checkout 20:00, distance: 2000kms, family car, instant booking
     # output: 3 instances of object Car
-    # car_1 = Car.new(id_drivy: 1111, price: 350, title: "Fiat 500", photo: "https://www.fiat.co.uk/content/dam/fiat/cross/models/500_family/500/external/secondskin/comics-Rossa.jpg")
-    # car_2 = Car.new(id_drivy: 2222, price: 450, title: "BMW Serie A", photo: "http://cloudlakes.com/data_images/models/bmw-1/bmw-1-02.jpg")
-    # car_3 = Car.new(id_drivy: 3333, price: 550, title: "Peugeot 506", photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLtIbhO-iU4WnsUVcoUaW9nAR_DXniTpqUSHKQsfn1NsV7Pk48")
-    # return [car_1, car_2, car_3]
-
-    address = "12+Rue+du+Bac+Paris+France"
+    results = Geocoder.search(address, :params => {:countrycodes => "fr"})
+    latitude = results.first.data["geometry"]["location"]["lat"]
+    longitude = results.first.data["geometry"]["location"]["lng"]
     checkin = "2017-12-28"
     checkout = "2017-12-31"
     @cars = []
     search = FetchDrivySearch.new(
         checkin: checkin,
         checkout: checkout,
-        address: address
+        address: address,
+        latitude: latitude,
+        longitude: longitude
       )
     @cars = search.call
 

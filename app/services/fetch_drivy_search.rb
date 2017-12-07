@@ -7,32 +7,35 @@ class FetchDrivySearch
   end
 
   def call
-    base_url_search = 'https://www.drivy.com/search.json?'
+    base_url_search = 'https://www.drivy.com/search.json'
 
-    query_params_1 = {
+    query_params = {
+      instant_bookable: "yes",
       address_source: 'google',
       start_time: '08:00',
       country_scope: 'FR',
-      start_date: @attributes[:checkin]
-      #latitude: @attributes[:address].latitude
-    }
-
-    query_params_2 = {
-      #longitude: @attributes[:address].longitude,
+      start_date: @attributes[:checkin],
+      latitude: @attributes[:latitude],
+      car_types: ["family"],
+      longitude: @attributes[:longitude],
       end_time: '20:00',
       end_date: @attributes[:checkout],
       address: @attributes[:address],
       distance: '2000'
     }
 
-    url_drivy = base_url_search + 'instant_bookable=yes'
-    query_params_1.each do |k, v|
-      url_drivy += '&' + k.to_s + '=' + v.to_s
+    params = []
+    query_params.each do |k, v|
+      if v.is_a?(Array)
+        v.each do |value|
+          params << "#{k}[]=#{value}"
+        end
+      else
+        params << "#{k}=#{v}"
+      end
     end
-    url_drivy += '&' + 'car_types[]=family'
-    query_params_2.each do |k, v|
-      url_drivy += '&' + k.to_s + '=' + v.to_s
-    end
+
+    url_drivy = "#{base_url_search}?#{params.join("&")}"
 
     listings_serialized = open(url_drivy).read
     listings = JSON.parse(listings_serialized)
