@@ -11,30 +11,86 @@
 
   <hr>
 
-
   <% @offers.each do |offer| %>
   <h2>Offer <%= offer.id + 1%></h2>
-  <p><%= offer.flat.domain.name %></p>
-  <div class='offer-container'>
-    <div class="img_container">
-      <%= image_tag offer.flat.photo, class: 'flat_img' %>
-    </div>
-    <p><%= offer.flat.price_by_night %>€ per night</p>
-    <div class="img_container">
-      <%= image_tag offer.car.photo, class: 'car_img' %>
-    </div>
-    <p><%= offer.car.price %>€</p>
-  </div>
-  <p><strong>Total: <%= offer.total_price %>€ - <em><%= offer.total_price.fdiv(@guests_number.to_i)%>€ per person</em></strong></p>
 
-  <%= simple_form_for(@order)  do |f| %>
-  <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
-  <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car.photo } %>
-  <%= f.input :flat_price, :as => :hidden, :input_html => { :value => offer.flat.price_by_night } %>
-  <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat.photo } %>
-  <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price } %>
-  <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.flat.domain.id } %>
-  <%= f.button :submit, class: "btn btn-primary" %>
-  <% end %>
-  <% end %>
+
+
+  <div class='offer-container'>
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path "tignes-pic.jpg" %>);">
+            <div class="card-category"><h2>Resort</h2></div>
+            <div class="card-description">
+              <h2><%= offer.flat.domain.name %></h2>
+              <p><%= offer.flat.domain.mountain_chain %></p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-links">
+              <h5>Snow depth at resort: <%= offer.flat.domain.snow_depth_low %> cm</h5>
+              <h5>Snow depth at the top: <%= offer.flat.domain.snow_depth_high %> cm</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag offer.flat.photo, :class => "center-cropped" %>
+            <div class="card-category"><h2>Housing</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-links">
+              <h5><%= offer.car.title %></h5>
+              <h5><%= offer.flat.price_by_night %>€ per night</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag offer.car.photo, :class => "center-cropped", :align=> "middle"%>
+            <div class="card-category"><h2>Car</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-links">
+              <h5><%= offer.car.title %></h5>
+              <h5><%= offer.car.price %>€ for your trip</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br />
+
+  <div class="total-order">
+    <p><strong>Total: <%= offer.total_price %>€ - <em><%= offer.total_price.fdiv(@guests_number.to_i)%>€ per person</em></strong></p>
+  </div>
+
+    <center>
+    <%= simple_form_for(@order)  do |f| %>
+    <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
+    <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car.photo } %>
+    <%= f.input :flat_price, :as => :hidden, :input_html => { :value => offer.flat.price_by_night } %>
+    <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat.photo } %>
+    <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price } %>
+    <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.flat.domain.id } %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <br><br />
+    <% end %>
+    </center>
+    <% end %>
+<br><br />
 </div>

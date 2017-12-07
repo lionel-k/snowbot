@@ -5,6 +5,7 @@
 
 .card {
   flex: 1 1 auto;
+  min-width: 300px;
   margin: 10px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -18,7 +19,8 @@
 
 .card-body {
   border-radius: 5px 5px 0 0;
-  height: 180px;
+  height: 210px;
+  width: auto;
   background-size: cover;
   color: white;
   position: relative;
@@ -45,6 +47,7 @@
   font-size: 20px;
   margin-bottom: 0px;
   font-weight: bold;
+  text-align: left;
 }
 .card-description p {
   font-size: 14px;
