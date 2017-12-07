@@ -21,9 +21,14 @@ gem "geocoder"
 # Facebook Login
 gem 'omniauth-facebook'
 
+# Background jobs
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+
 # STRIPE
 gem 'money-rails'
 gem 'stripe'
+
 
 group :development, :test do
   gem 'pry-byebug'
