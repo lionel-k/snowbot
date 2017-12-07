@@ -40,7 +40,8 @@ class FetchDrivySearch
     listings_serialized = open(url_drivy).read
     listings = JSON.parse(listings_serialized)
     available_cars = listings['cars']
-    three_lowest_cars = available_cars.sort_by {|k| k['humanPrice'] }.first(3)
+    min_total_price = (@attributes[:checkout].to_date - @attributes[:checkin].to_date) * 80
+    three_lowest_cars = available_cars.select {|k| k['humanPrice'].delete('€').to_i > min_total_price }.sort_by {|k| k['humanPrice'].delete('€').to_i }.first(3)
 
     three_lowest_cars_array = []
     three_lowest_cars.each do |car|
