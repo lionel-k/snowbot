@@ -29,9 +29,23 @@ h2 {
   padding: 100px 0;
 }
 .wrapper-grey {
-  background: #F4F4F4;
+  background: white;
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
+.video-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+    .video-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+
+}
 
