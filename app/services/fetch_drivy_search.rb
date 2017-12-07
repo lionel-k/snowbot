@@ -42,13 +42,15 @@ class FetchDrivySearch
     available_cars = listings['cars']
     three_lowest_cars = available_cars.sort_by {|k| k['humanPrice'] }.first(3)
 
+    three_lowest_cars_array = []
     three_lowest_cars.each do |car|
-      Car.new(
+      three_lowest_cars_array << Car.new(
         id_drivy: car['id'],
-        price: car['humanPrice'],
+        price: car['humanPrice'].delete('€').to_i,
         title: car['carTitle'],
         photo: car['carThumbUrl']
       )
     end
+    return three_lowest_cars_array
   end
 end

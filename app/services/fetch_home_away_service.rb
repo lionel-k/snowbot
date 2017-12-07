@@ -7,6 +7,7 @@ class FetchHomeAwayService
   end
 
   def call
+
     base_url_search = 'https://ws.homeaway.com/public/search?'
 
     headers = {
@@ -37,7 +38,7 @@ class FetchHomeAwayService
 
     best_rated_available_flats = []
     available_flats.each do |flat|
-      if flat['reviewAverage'].to_f >= 4 || flat['priceQuote']['averageNightly'] > 100
+      if flat['reviewAverage'].to_f >= 4 && flat['priceQuote']['averageNightly'] > 100
         best_rated_available_flats << flat
       end
     end
@@ -48,7 +49,7 @@ class FetchHomeAwayService
     f = Flat.new(
       id_homeaway: flat['listingId'],
       location: flat['location']['city'],
-      price_by_night: flat['priceQuote']['averageNightly'],
+      price_by_night: flat['priceQuote']['averageNightly'].to_f.ceil,
       ratings: flat['reviewAverage'],
       photo: flat['thumbnail']['secureUri']
     )
