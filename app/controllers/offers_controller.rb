@@ -39,37 +39,44 @@ class OffersController < ApplicationController
   end
 
   def search_flats(mountain_chain, checkin, checkout, guests_number)
+    domains = Domain.
+      where("snow_depth_low > ? AND mountain_chain = ?", "30", mountain_chain).
+      order(snow_depth_low: :desc)
+    return if domains.empty?
 
-    domains = Domain.where("snow_depth_low > ? AND mountain_chain = ?", "30", mountain_chain)
-    return if domains.nil?
     flats = []
-    i = 0
-    until flats.length >= 3 || domains[i].nil?
+
+    domains.each do |domain|
+      break if flats.size == 3
+
       service = FetchHomeAwayService.new(
         checkin: checkin,
         checkout: checkout,
         guests_number: guests_number,
-        domain: domains[i]
+        domain: domain
       )
 
       flat = service.call
+      sleep 1
       next unless flat
 
-      flat.domain = domains[i]
+      flat.domain = domain
       flats << flat
-      i += 1
     end
+
     return flats
   end
 
   def build_package
     @diff_days = @checkout.mjd - @checkin.mjd
     offers = []
+
     @flats.each_with_index do |flat, index|
       offer = Offer.new(id: index, car: @cars[index], flat: @flats[index])
       offer.compute_total(@diff_days)
       offers << offer
     end
+
     return offers
   end
 end
