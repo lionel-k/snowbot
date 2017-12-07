@@ -1,11 +1,6 @@
 #footer {
   background: #333333;
-  padding: 10px 0px;
   color: #CCCCCC;
-  // position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 100px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -13,15 +8,12 @@
 }
 
 #footer p {
-  margin-top: 30px;
-  align-items: center;
-  font-size: 12px;
-  text-align: center;
+  font-size: 15px;
 }
+
 #footer ul {
   display: inline-block;
   padding: 10px;
-  margin-top: 10px;
   font-size:10px;
   text-align: center;
 }
@@ -35,4 +27,28 @@
   color: rgba(80, 185, 249, 1);
 }
 
+.network {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.copyright{
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
+  display: inline-block;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.cgv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+}

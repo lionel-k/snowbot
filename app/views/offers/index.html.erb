@@ -1,22 +1,35 @@
 <div class="container">
   <h1>Offers found for you</h1>
-  <% @offers.each do |offer| %>
-    <h2>Offer <%= offer.id %></h2>
-    <p><%= offer.flat.domain.name %>
-    <%= image_tag offer.flat.photo, size: "150" %> <span><%= offer.flat.price_by_night %>€</span>
-    <%= image_tag offer.car.photo, size: "200" %> <span><%= offer.car.price %>€</span>
-    <%= link_to "See details", offers_path %>
+  <p>
+    <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
+    to
+    <span><strong><%= @checkout.strftime("%A, %b %d") %></strong></span>
+    <span>
+    (<%= "#{@diff_days}"%> <%= 'night'.pluralize %>
+    </span> )
   </p>
-  <p>Total: <%= offer.car.price + offer.flat.price_by_night %>€</p>
+
+  <hr>
+
+  <% @offers.each do |offer| %>
+  <h2>Offer <%= offer.id %></h2>
+  <p><%= offer.flat.domain.name %>
+    <%= image_tag offer.flat.photo, size: "150" %>
+    <span><%= offer.flat.price_by_night %>€</span> per night
+    <span><%=  %></span>
+    <%= image_tag offer.car.photo, size: "200" %> <span><%= offer.car.price %>€</span>
+  </p>
+  <p><strong>Total: <%= offer.total_price %>€</strong></p>
   <p>
     <%= simple_form_for(@order)  do |f| %>
     <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
     <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car.photo } %>
     <%= f.input :flat_price, :as => :hidden, :input_html => { :value => offer.flat.price_by_night } %>
     <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat.photo } %>
+    <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price } %>
     <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.flat.domain.id } %>
     <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
-    </p>
+  </p>
   <% end %>
 </div>
