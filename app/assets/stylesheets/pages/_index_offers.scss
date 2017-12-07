@@ -1,0 +1,22 @@
+.img_container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.flat_img {
+  width: auto;
+  height: 100px;
+  object-fit: cover;
+}
+
+.car_img {
+  width: auto;
+  height: 100px;
+  object-fit: cover;
+}
+
+.offer-container {
+  display: flex;
+}

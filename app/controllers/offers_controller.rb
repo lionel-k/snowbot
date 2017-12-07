@@ -41,9 +41,10 @@ class OffersController < ApplicationController
   def search_flats(mountain_chain, checkin, checkout, guests_number)
 
     domains = Domain.where("snow_depth_low > ? AND mountain_chain = ?", "30", mountain_chain)
+    return if domains.nil?
     flats = []
     i = 0
-    until flats.length > 3 || domains[i].nil?
+    until flats.length >= 3 || domains[i].nil?
       service = FetchHomeAwayService.new(
         checkin: checkin,
         checkout: checkout,
@@ -69,5 +70,6 @@ class OffersController < ApplicationController
       offer.compute_total(@diff_days)
       offers << offer
     end
+    return offers
   end
 end
