@@ -51,7 +51,8 @@ class FetchHomeAwayService
       location: flat['location']['city'],
       price_by_night: flat['priceQuote']['averageNightly'].to_f.ceil,
       ratings: flat['reviewAverage'],
-      photo: flat['thumbnail']['uri']
+      photo: flat['thumbnail']['uri'],
+      title: flat['headline']
     )
   end
 end
