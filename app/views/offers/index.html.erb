@@ -1,6 +1,6 @@
 <div class="container">
   <br />
-  <h1>Offers found for you</h1>
+  <h1>Our very nice Trips found for you</h1>
   <p>
     <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
     to
@@ -13,7 +13,7 @@
   <hr>
 
   <% @offers.each do |offer| %>
-  <h2>Offer <%= offer.id + 1%></h2>
+  <h2>Top Offer <%= offer.id + 1%></h2>
 
 
 
@@ -49,7 +49,7 @@
           <div class="card-footer">
             <div class="card-links">
               <h5><%= offer.flat.title %></h5>
-              <h5><%= offer.flat.price_by_night %>€ per night</h5>
+              <h5><%= offer.flat.price_by_night %>€/night</h5>
             </div>
           </div>
         </div>
@@ -74,12 +74,12 @@
 
     </div>
   </div>
-  <br />
+<!--   <br /> -->
 
   <div class="total-order">
     <h5><strong>Total: <%= offer.total_price %>€ - <em><%= offer.total_price.fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
   </div>
-
+<br />
     <center>
     <%= simple_form_for(@order)  do |f| %>
     <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car.price } %>
