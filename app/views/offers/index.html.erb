@@ -77,7 +77,7 @@
   <br />
 
   <div class="total-order">
-    <p><strong>Total: <%= offer.total_price %>€ - <em><%= offer.total_price.fdiv(@guests_number.to_i)%>€ per person</em></strong></p>
+    <h5><strong>Total: <%= offer.total_price %>€ - <em><%= offer.total_price.fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
   </div>
 
     <center>
@@ -88,7 +88,7 @@
     <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat.photo } %>
     <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price } %>
     <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.flat.domain.id } %>
-    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= f.button :submit, "Book your trip", class: "btn-custom" %>
     <br><br />
     <% end %>
     </center>
