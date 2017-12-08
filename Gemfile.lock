@@ -60,6 +60,9 @@ GEM
       warden (~> 1.2.3)
     erubi (1.7.0)
     execjs (2.7.0)
+    facebook-messenger (1.0.0)
+      httparty (~> 0.13, >= 0.13.7)
+      rack (>= 1.6.4)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -71,6 +74,8 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.6)
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -235,6 +240,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
   devise
+  facebook-messenger
   figaro
   font-awesome-sass
   geocoder
