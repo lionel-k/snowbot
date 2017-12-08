@@ -16,7 +16,7 @@
               <%= date_field 'checkin', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkin" %>
               <%= date_field 'checkout', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkout" %>
               <%= select_tag 'guests_number', options_for_select([['1'], ['2'], ['3'], ['4'], ['5']]), class: "form-control text-center unselected search-input", id: 'guest', prompt: "Guests" %>
-              <%= submit_tag "Search", class: "btn home-btn" %>
+              <%= submit_tag "Search", class: "btn btn-custom" %>
             <% end %>
           </div>
     </div>
