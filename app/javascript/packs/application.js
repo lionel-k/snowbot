@@ -9,5 +9,5 @@ import '../components/change_home_inputs';
 // import '../components/tabs';
 // import "dashboard";
 
-// import { loadDynamicBannerText } from '../components/banner';
-// loadDynamicBannerText();
+import { loadDynamicBannerText } from '../components/banner';
+loadDynamicBannerText();

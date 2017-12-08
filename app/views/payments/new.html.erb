@@ -1,25 +1,27 @@
-<div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
+<div class="banner" style="background: url('<%= image_path "pay_photo.jpg" %>')">
   <div class="banner-content">
-    <h1>Purchase of the choosen offer</h1>
+    <h2>You're just one step away from your awesome ski trip!</h2>
 
     <%= form_tag order_payments_path(@order) do %>
+    <br />
     <center>
       <article>
         <label class="amount">
-          <span>Amount: <%= humanized_money_with_symbol(@order.amount) %></span>
+          <span>Amount: <%= humanized_money(@order.amount) %>€</span>
         </label>
       </article>
-      </center>
-      <br><br />
+    </center>
+    <br><br />
     <center>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-        data-name="SnowBot"
-        data-email="<%= current_user.email %>"
-        data-description="My Ski Trip<%= @order.id %>"
-        data-amount="<%= @order.amount_cents %>"
-        data-currency="<%= @order.amount.currency %>"></script>
-    </center>
-    <% end %>
-  </div>
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-name="SnowBot"
+      data-email="<%= current_user.email %>"
+      data-description="My Ski Trip<%= @order.id %>"
+      data-amount="<%= @order.amount_cents %>"
+      data-currency="<%= @order.amount.currency %>">
+    </script>
+  </center>
+  <% end %>
+</div>
 </div>

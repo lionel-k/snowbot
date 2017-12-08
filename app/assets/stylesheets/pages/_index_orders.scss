@@ -15,3 +15,24 @@ ul {
   padding-left: 0px;
   list-style-type: none;
 }
+
+
+.separator {
+  border-bottom: 2px solid rgba(220,224,244,0.8);
+  margin-bottom: 25px;
+  padding-bottom: 25px
+}
+
+
+.card-footer-order{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  min-height: 150px;
+  font-weight: bolder;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0 0 5px 5px;
+  justify-content: center;
+
+}

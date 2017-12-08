@@ -7,10 +7,11 @@
   flex: 1 1 auto;
   min-width: 300px;
   margin: 10px;
+  margin-bottom: 15px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
-  background-color: lightgrey;
+  background-color: white;
 }
 
 .card-order {
@@ -21,6 +22,8 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
   background-color: white;
+  color: #259F6C;
+  justify-content: center;
 }
 
 .card:hover {
@@ -33,6 +36,7 @@
   width: auto;
   background-size: cover;
   color: white;
+  font-weight: bolder;
   position: relative;
 }
 
@@ -76,10 +80,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  min-height: 55px;
+  min-height: 150px;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0 0 5px 5px;
+
 }
 
 .card-date {
@@ -92,6 +97,7 @@
   color: rgba(0,0,0,0.4);
   font-weight: lighter;
   font-size: 12px;
+  color: #5C636E;
 }
 
 .card-links i{
