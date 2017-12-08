@@ -1,5 +1,8 @@
 import "bootstrap";
-// import "../plugins/flatpickr";
+import { autocomplete } from '../components/autocomplete';
+autocomplete();
+import "../plugins/flatpickr";
+import '../components/change_home_inputs';
 // import '../components/select2';
 // import '../components/guest_form_input';
 // import '../components/totalPrice';
@@ -8,5 +11,3 @@ import "bootstrap";
 
 import { loadDynamicBannerText } from '../components/banner';
 loadDynamicBannerText();
-import { autocomplete } from '../components/autocomplete';
-autocomplete();

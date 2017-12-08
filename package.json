@@ -5,6 +5,7 @@
     "@rails/webpacker": "^3.0.2",
     "bootstrap": "3",
     "coffeescript": "1.12.7",
+    "flatpickr": "^4.1.4",
     "gmaps": "^0.4.24",
     "jquery": "^3.2.1",
     "typed.js": "^2.0.6"
