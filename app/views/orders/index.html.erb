@@ -1,9 +1,11 @@
 <div class="container">
 
   <h1>Your orders</h1>
-  <h2>User: <%= current_user.email %></h2>
-  <h2>User: <%= current_user.first_name %></h2>
-  <h2>User: <%= current_user.last_name %></h2>
+  <h2>Email: <%= current_user.email %></h2>
+
+  <h2><%= "First Name: #{current_user.first_name}" unless current_user.first_name.nil? %></h2>
+  <h2><%= "Last Name: #{current_user.last_name}" unless current_user.last_name.nil? %></h2>
+
   <% current_user.orders.each do |order| %>
     <div class="row separator">
 
