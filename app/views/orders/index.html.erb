@@ -1,15 +1,68 @@
 <div class="container">
+<br />
   <h1>Your orders</h1>
   <h2>User: <%= current_user.email %></h2>
-  <% current_user.orders.each do |order| %>
+
+  <div class="row orders-history">
+    <% current_user.orders.each do |order| %>
+    <br><br />
     <p>Total Price: <%= order.total_price %></p>
-    <%= image_tag order.drivy_data["photo"], size: "200" %>
-    <%= image_tag order.homeaway_data["photo"], size: "200" %>
-    <h3>Details of the order</h3>
-    <ul>
-      <li>Status: <%= order.status %></li>
-      <li>Amount: <%= humanized_money_with_symbol(order.amount) %></li>
-    <ul>
-    <hr>
-  <% end %>
+    <br><br />
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card-order">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag order.homeaway_data["photo"], :class => "center-cropped" %>
+            <div class="card-category"><h2>Housing</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "logo_homeaway.png" %>');">
+            <div class="card-links">
+              <h5></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card-order">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag order.drivy_data["photo"], :class => "center-cropped", :align=> "middle"%>
+            <div class="card-category"><h2>Car</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "logo_drivy.png" %>');">
+            <div class="card-links">
+              <h5></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card-order">
+          <div class="card-body center-cropped" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "lift.png" %>');">
+            <div class="card-category"><h2>Order Status</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-links">
+              <h5>Amount: <%= humanized_money_with_symbol(order.amount) %> | Status: <%= order.status %></h5>
+              <!-- <ul> -->
+          <!--       <li>Status: <%= order.status %></li> -->
+                <!-- <li>Amount: <%= humanized_money_with_symbol(order.amount) %></li> -->
+             <!--  <ul> -->
+            </div>
+          </div>
+<!--       <h3>Details of the order</h3> -->
+        </div>
+      </div>
+      <hr>
+    <% end %>
+    <br><br />
+
+  </div>
 </div>

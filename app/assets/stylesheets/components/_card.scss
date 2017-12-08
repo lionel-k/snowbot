@@ -5,11 +5,22 @@
 
 .card {
   flex: 1 1 auto;
+  min-width: 300px;
   margin: 10px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
   background-color: lightgrey;
+}
+
+.card-order {
+    flex: 1 1 auto;
+  min-width: 300px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  background-color: white;
 }
 
 .card:hover {
@@ -18,7 +29,8 @@
 
 .card-body {
   border-radius: 5px 5px 0 0;
-  height: 180px;
+  height: 210px;
+  width: auto;
   background-size: cover;
   color: white;
   position: relative;
@@ -45,6 +57,7 @@
   font-size: 20px;
   margin-bottom: 0px;
   font-weight: bold;
+  text-align: left;
 }
 .card-description p {
   font-size: 14px;
@@ -63,6 +76,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  min-height: 55px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0 0 5px 5px;
 }
 
 .card-date {
