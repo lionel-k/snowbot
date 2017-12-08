@@ -1,50 +1,13 @@
-.btn-medium {
-  text-decoration: none;
-  color: #999999;
-  border: 1px solid #999999;
-  padding: 15px 25px;
-  border-radius: 50px;
-  font-weight: lighter;
-  opacity: 0.6;
+.btn-custom {
+  margin-top: 0px;
+  background-color: rgba(70, 175, 248, 0.8);
+  border: blue;
+  border-radius: 7px;
+  font-size: 15px;
+  padding: 15px;
 }
 
-.btn-medium:hover {
-  opacity: 1;
-  text-decoration: none;
-  color: #999999;
-}
-
-.btn-treehouse {
-  text-decoration: none;
-  background-color: #6AD58B;
-  color: #fff;
-  padding: 15px 25px;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.btn-treehouse:hover {
-  opacity: 1;
-  background: #3ac162;
-  text-decoration: none;
-  color: white;
-}
-
-.btn-yours {
-  text-decoration: none;
-  background-color: rgba(63, 164, 248, 0.4) !important;
-  color: black;
-  padding: 15px 40px;
-  border-radius: 15px;
-  font-weight: light;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4)
-  transition: background 0.3s ease;
-}
-
- .btn-yours:hover {
-  opacity: 1;
-  background: #3ac162;
-  text-decoration: none;
+.btn-custom:hover {
+  background-color: rgba(80, 185, 249, 1);
   color: white;
 }
