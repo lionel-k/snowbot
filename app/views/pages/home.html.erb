@@ -4,8 +4,7 @@
   <div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
     <div class="banner-content">
       <h1>FIND YOUR SKI TRIP</h1>
-      <p>SnowBot finds for you the right package that fit your need!</p>
-          <p><span id="banner-typed-text"></span></p>
+         <p><span id="banner-typed-text"></span></p>
           <div class="container-form-banner text-center">
             <%= form_tag offers_path, method: :get, class: 'form-inline form-banner' do %>
               <%= text_field_tag 'start_city', nil, class: "form-control text-center", placeholder: "Start Address", autofocus: true %>
