@@ -2,7 +2,10 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
+    (params[:checkin].first.blank? || params[:checkout].first.blank? || params[:start_city].blank?)  ? (redirect_to root_path) : search_offers
+  end
 
+  def search_offers
     @mountain_chain = params[:mountain_chain]
     @guests_number = params[:guests_number]
     @checkin = Date.parse(params[:checkin].first)
