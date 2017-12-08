@@ -29,6 +29,8 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'money-rails'
 gem 'stripe'
 
+gem 'webpacker'
+
 
 group :development, :test do
   gem 'pry-byebug'
