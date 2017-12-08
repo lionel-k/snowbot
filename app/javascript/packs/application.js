@@ -6,7 +6,7 @@ import "bootstrap";
 // import '../components/tabs';
 // import "dashboard";
 
-// import { loadDynamicBannerText } from '../components/banner';
-// loadDynamicBannerText();
+import { loadDynamicBannerText } from '../components/banner';
+loadDynamicBannerText();
 import { autocomplete } from '../components/autocomplete';
 autocomplete();

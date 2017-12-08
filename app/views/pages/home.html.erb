@@ -4,23 +4,21 @@
   <div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
     <div class="banner-content">
       <h1>FIND YOUR SKI TRIP</h1>
-      <p>SnowBot finds for you the right package that fit your need!</p>
-
-          <div class="container-form-banner text-center">
-            <%= form_tag offers_path, method: :get, class: 'form-inline form-banner' do %>
-              <%= text_field_tag 'start_city', nil, class: "form-control text-center", placeholder: "Start Address", autofocus: true %>
-              <%= select_tag 'mountain_chain', options_for_select(
-              Domain.select(:mountain_chain).map(&:mountain_chain).uniq
-              ),
-              class: "form-control text-center",
-                placeholder: "Mountain" %>
-              <%= date_field 'checkin', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkin" %>
-              <%= date_field 'checkout', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkout" %>
-              <%= select_tag 'guests_number', options_for_select([['1'], ['2'], ['3'], ['4'], ['5']]), class: "form-control text-center unselected", id: 'guest', prompt: "Guests" %>
-              <%= submit_tag "Search", class: "btn btn-custom" %>
-            <% end %>
-          </div>
-
+      <p><span id="banner-typed-text"></span></p>
+        <div class="container-form-banner text-center">
+          <%= form_tag offers_path, method: :get, class: 'form-inline form-banner' do %>
+            <%= text_field_tag 'start_city', nil, class: "form-control text-center", placeholder: "Start Address", autofocus: true %>
+            <%= select_tag 'mountain_chain', options_for_select(
+            Domain.select(:mountain_chain).map(&:mountain_chain).uniq
+            ),
+            class: "form-control text-center",
+              placeholder: "Mountain" %>
+            <%= date_field 'checkin', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkin" %>
+            <%= date_field 'checkout', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkout" %>
+            <%= select_tag 'guests_number', options_for_select([['1'], ['2'], ['3'], ['4'], ['5']]), class: "form-control text-center unselected", id: 'guest', prompt: "Guests" %>
+            <%= submit_tag "Search", class: "btn btn-custom" %>
+          <% end %>
+        </div>
     </div>
   </div>
 
