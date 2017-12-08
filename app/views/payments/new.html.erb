@@ -1,8 +1,9 @@
-<div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
+<div class="banner" style="background: url('<%= image_path "pay_photo.jpg" %>')">
   <div class="banner-content">
-    <h1>Purchase of the choosen offer</h1>
+    <h2>You're just one step away from your awesome ski trip!</h2>
 
     <%= form_tag order_payments_path(@order) do %>
+    <br />
     <center>
       <article>
         <label class="amount">

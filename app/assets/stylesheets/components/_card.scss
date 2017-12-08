@@ -36,6 +36,7 @@
   width: auto;
   background-size: cover;
   color: white;
+  font-weight: bolder;
   position: relative;
 }
 
@@ -79,10 +80,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  min-height: 65px;
+  min-height: 150px;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0 0 5px 5px;
+
 }
 
 .card-date {
@@ -95,6 +97,7 @@
   color: rgba(0,0,0,0.4);
   font-weight: lighter;
   font-size: 12px;
+  color: #5C636E;
 }
 
 .card-links i{
