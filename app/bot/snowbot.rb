@@ -1,34 +1,62 @@
 include Facebook::Messenger
 
-Bot.on :message do |message|
-  message.typing_on
-  if message.text == 'You are!'
-    message.reply(text: 'Great')
-  else
-    message.reply(
-        text: 'Human, who is your favorite bot?',
+Bot.on :postback do |postback|
+  if postback.payload == 'get_started'
+    postback.reply(
+      text: 'Ready to book your next ski trip? 🏂',
+      )
+    sleep(0.3)
+    postback.reply(
+      text: 'Indicate the mountain chain where you\'d like to go skiing!',
       quick_replies: [
         {
           content_type: 'text',
-          title: 'You are!',
-          payload: 'HARMLESS'
+          title: 'Alpes du Nord',
+          payload: 'alpes_nord'
+          },
+          {
+            content_type: 'text',
+            title: 'Alpes du Sud',
+            payload: 'alpes_sud'
+            },
+            {
+              content_type: 'text',
+              title: 'Pyrénées',
+              payload: 'pyrenees'
+            }
+          ]
+          )
+  end
+end
+
+Bot.on :message do |message|
+  if message.text == 'Alpes du Nord'
+    message.reply(
+      text: 'There are great resorts in the Alps'
+    )
+    sleep(0.3)
+    message.reply(
+      attachment: {
+        type: 'image',
+        payload: {
+          url: 'https://comeonhitme.files.wordpress.com/2013/07/27716.jpg'
+        }
+      }
+    )
+    sleep(0.3)
+    message.reply(
+      text: "Our best resort today is the #{Domain.
+      order(snow_depth_low: :desc).first.name} domain where there is #{Domain.
+      order(snow_depth_low: :desc).first.snow_depth_low} cm of snow"
+    )
+    sleep(0.3)
+    message.reply(
+      text: 'Please indicate a precise location where you\'d like to pick up the rental car 🚙',
+      quick_replies:[
+        {
+          "content_type":"location"
         }
       ]
     )
   end
 end
-
-# message.reply(
-#   attachment: {
-#     type: 'image',
-#     payload: {
-#       url: 'https://vignette.wikia.nocookie.net/clubpenguin/images/3/33/Wispy_Clouds_Icon.png/revision/latest/scale-to-width-down/640?cb=20140806145455'
-#     }
-
-
-  # message.id          # => 'mid.1457764197618:41d102a3e1ae206a38'
-  # message.sender      # => { 'id' => '1008372609250235' }
-  # message.seq         # => 73
-  # message.sent_at     # => 2016-04-22 21:30:36 +0200
-  # message.text        # => 'Hello, bot!'
-  # message.attachments # => [ { 'type' => 'image', 'payload' => { 'url' => 'https://www.example.com/1.jpg' } } ]
