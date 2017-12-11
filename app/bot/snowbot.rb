@@ -38,7 +38,6 @@ Bot.on :postback do |postback|
       text: "Hello #{first_name} :) Ready to book your next ski trip? 🏂",
       )
 
-
     postback.reply(
       text: 'Indicate the mountain chain where you\'d like to go skiing!',
       quick_replies: Domain.select(:mountain_chain).distinct.map do |domain|
@@ -49,7 +48,7 @@ Bot.on :postback do |postback|
         }
       end
 
-          )
+      )
   end
 end
 
@@ -64,9 +63,7 @@ Bot.on :message do |message|
 
     current_user.query = { mountain_chain: mountain_chain }
     current_user.save
-    # current_user.save
-    # puts mountain_chain
-    # binding.pry
+
     message.reply(
       text: 'Please indicate a precise location where you\'d like to pick up the rental car 🚙',
       quick_replies:[
@@ -77,7 +74,6 @@ Bot.on :message do |message|
       ]
       )
   when "checkin"
-    # checkin = message.text
     case message.text
     when "Tomorrow"
       date_checkin = Date.today + 1
@@ -88,30 +84,19 @@ Bot.on :message do |message|
     end
 
     checkin = date_checkin.strftime("%Y-%m-%d")
-    # current_user.query = { checkin: checkin }
     current_user.query = current_user.query.merge({ checkin: checkin })
     current_user.save
 
     message.reply(
       text: 'How many days are you planning to stay there?',
-      quick_replies:[
+      quick_replies: [3, 5, 7, 9].map do |day|
         {
-          title: '3 days',
+          title: "#{day} days",
           content_type: "text",
           payload: 'checkout'
-          },
-          {
-            title: '5 days',
-            content_type: "text",
-            payload: 'checkout'
-            },
-            {
-              title: '7 days',
-              content_type: "text",
-              payload: 'checkout'
-            }
-          ]
-          )
+        }
+      end
+      )
   when "checkout"
     # checkout = message.text
     number_of_days = message.text.split.first.to_i
