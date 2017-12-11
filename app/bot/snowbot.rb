@@ -53,8 +53,7 @@ Bot.on :postback do |postback|
 end
 
 Bot.on :message do |message|
-  # binding.pry
-  # p message
+
   user_psid = message.sender["id"]
   current_user = User.where(psid: user_psid).first
   case message.quick_reply
@@ -107,33 +106,21 @@ Bot.on :message do |message|
 
     message.reply(
       text: 'How many people are going with you?',
-      quick_replies:[
+      quick_replies: [2, 3, 4].map do |number|
         {
-          title: '2',
+          title: "#{number}",
           content_type: "text",
           payload: 'guests_number'
-          },
-          {
-            title: '3',
-            content_type: "text",
-            payload: 'guests_number'
-            },
-            {
-              title: '4',
-              content_type: "text",
-              payload: 'guests_number'
-            }
-          ]
-          )
+        }
+      end
+
+      )
 
   when "guests_number"
     guests_number = message.text
     current_user.query = current_user.query.merge({ guests_number: guests_number })
     current_user.save
 
-    puts 'Finished asking questions'
-    # p message
-    # p current_user
     user_psid = message.sender["id"]
     current_user = User.where(psid: user_psid).first
 
@@ -192,11 +179,6 @@ Bot.on :message do |message|
           }
           )
   else
-    # p "location"
-    # p message
-    # checkin = message.messaging["message"]["text"]
-    # location = message.messaging["message"]["attachments"][0]["payload"]["coordinates"]
-    # location = location.nil? ? { "lat"=>48, "long"=>2 } : location
     unless message.messaging["message"]["attachments"].nil?
       location = message.messaging["message"]["attachments"][0]["payload"]["coordinates"]
       # p location {"lat"=>48.8648441, "long"=>2.3798836}
@@ -205,29 +187,19 @@ Bot.on :message do |message|
 
       message.reply(
         text: 'When do you want to leave?',
-        quick_replies:[
+        quick_replies: ['Tomorrow', 'In 2 days', 'In 3 days'].map do |duration|
           {
-            title: 'Tomorrow',
+            title: "#{duration}",
             content_type: "text",
             payload: 'checkin'
-            },
-            {
-              title: 'In 2 days',
-              content_type: "text",
-              payload: 'checkin'
-              },
-              {
-                title: 'In 3 days',
-                content_type: "text",
-                payload: 'checkin'
-              }
-            ]
-            )
-    else # Date checkin/checkout
-      p message
-      checkin = message.messaging["message"]["text"]
-      # p "checkin"
-      # p message
+          }
+        end
+        )
+    else
+      message.reply(
+        text: "Sorry #{current_user.first_name}. I didnt understand the request",
+      }
+
     end
   end
 
