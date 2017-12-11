@@ -41,25 +41,15 @@ Bot.on :postback do |postback|
 
     postback.reply(
       text: 'Indicate the mountain chain where you\'d like to go skiing!',
-      quick_replies: [
+      quick_replies: Domain.select(:mountain_chain).distinct.map do |domain|
         {
           content_type: 'text',
-          title: 'Alpes du Nord',
+          title: "#{domain.mountain_chain.gsub("-"," ").upcase}",
           payload: 'mountain_chain'
-          },
-          {
-            content_type: 'text',
-            title: 'Alpes du Sud',
-            payload: 'mountain_chain'
-            },
-            {
-              content_type: 'text',
-              title: 'Pyrénées',
-              payload: 'mountain_chain'
-            }
-          ]
-          )
+        }
+      end
 
+          )
   end
 end
 
@@ -163,8 +153,8 @@ Bot.on :message do |message|
     current_user = User.where(psid: user_psid).first
 
     message.reply(
-        text: "#{current_user.first_name}, we are searching for you the best offers ..."
-    )
+      text: "#{current_user.first_name}, we are searching for you the best offers ..."
+      )
     message.typing_on
 
     offers_service = CreateOffersService.new(
@@ -178,44 +168,44 @@ Bot.on :message do |message|
     offers = offers_service.call
 
     message.reply(
-      {
-        attachment: {
-          type:"template",
-          payload: {
-            template_type:"generic",
-            elements:
-            offers.map do |offer|
-              {
-                title: offer.domain.name + " | " + offer.flat_title[0..29] + "... | " + offer.car_title,
-                image_url: offer.domain.img_domain,
-                subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
-                default_action: {
-                  type: "web_url",
-                  url: "https://859a9313.ngrok.io/",
-                  messenger_extensions: true,
-                  webview_height_ratio: "tall",
-                  fallback_url: "https://859a9313.ngrok.io/"
-                  },
-                  buttons:[
+    {
+      attachment: {
+        type:"template",
+        payload: {
+          template_type:"generic",
+          elements:
+          offers.map do |offer|
+            {
+              title: offer.domain.name + " | " + offer.flat_title[0..29] + "... | " + offer.car_title,
+              image_url: offer.domain.img_domain,
+              subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
+              default_action: {
+                type: "web_url",
+                url: "https://859a9313.ngrok.io/",
+                messenger_extensions: true,
+                webview_height_ratio: "tall",
+                fallback_url: "https://859a9313.ngrok.io/"
+                },
+                buttons:[
+                  {
+                    type:"web_url",
+                    url:"https://859a9313.ngrok.io/offers/#{offer.id}",
+                    title:"Pack in details"
+                    },
                     {
                       type:"web_url",
-                      url:"https://859a9313.ngrok.io/offers?utf8=✓&start_city=16+villa+gaudelet+paris&mountain_chain=#{current_user.query['mountain_chain']}&checkin%5B%5D=#{current_user.query['checkin']}&checkout%5B%5D=#{current_user.query['checkout']}&guests_number=#{current_user.query['guests_number']}&commit=Search",
-                      title:"Pack in details"
-                      },
-                      {
-                        type:"web_url",
-                        url: "https://859a9313.ngrok.io/orders/5/payments/new",
-                        title:"Book this trip !"
+                      url: "https://859a9313.ngrok.io/orders/5/payments/new",
+                      title:"Book this trip !"
                         # payload:"DEVELOPER_DEFINED_PAYLOAD"
                       }
                     ]
                   }
-            end
+                end
 
-                }
               }
             }
-            )
+          }
+          )
   else
     # p "location"
     # p message
