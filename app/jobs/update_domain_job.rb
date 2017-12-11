@@ -32,6 +32,12 @@ class UpdateDomainJob < ApplicationJob
       p domain.is_sunny = condition == "sun"  ? true : false
     end
 
+    url_photo = "https://www.skiinfo.fr/#{domain.mountain_chain}/#{domain.name_url}/station-de-ski.html"
+    html_file_photo = open(url_photo).read
+    html_doc_photo = Nokogiri::HTML(html_file_photo)
+    element_pic = html_doc_photo.search('#resort_image')
+    p domain.img_domain = element_pic.children[1].attributes['src'].value
+
     domain.save
     # p "- - - - - - - - - - - - - - - - - - - - - - -"
     # html_doc_weather.search('.weather')[1..7].each do |element|
