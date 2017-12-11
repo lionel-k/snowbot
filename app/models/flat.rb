@@ -1,5 +1,5 @@
 class Flat
-  attr_accessor :location, :id_homeaway, :price_by_night, :photo, :domain, :title
+  attr_accessor :location, :id_homeaway, :price_by_night, :photo, :domain, :title, :ratings
 
   def initialize(attributes = {})
     @location = attributes[:location]
