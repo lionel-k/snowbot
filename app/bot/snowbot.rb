@@ -1,5 +1,3 @@
-require_relative 'helpers'
-
 require 'json'
 require 'open-uri'
 
