@@ -232,7 +232,7 @@ def greet_current_user(postback)
   user_psid = postback.sender["id"]
 
   # Create a new user or find an existing one
-  current_user = User.where(psid: user_psid).first
+  current_user = User.find_by(psid: user_psid)
 
   current_user = current_user.nil? ? User.create(email: "#{user_psid}@mail.com", password: "123456", psid: user_psid) : current_user
 
