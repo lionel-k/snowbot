@@ -22,7 +22,9 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path "tignes-pic.jpg" %>);">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+
+            <%= image_tag offer.flat.domain.img_domain, :class => "center-cropped" %>
             <div class="card-category"><h2>Resort</h2></div>
             <div class="card-description">
               <h2><%= offer.flat.domain.name %></h2>
