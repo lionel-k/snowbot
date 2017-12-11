@@ -165,7 +165,8 @@ def display_offers(message, current_user)
         start_city: "7 Rue Perronet 75007 Paris",
         checkin: [current_user.query['checkin']],
         checkout: [current_user.query['checkout']],
-        guests_number: current_user.query['guests_number']
+        guests_number: current_user.query['guests_number'],
+        user: current_user
         )
 
       offers = offers_service.call
@@ -235,11 +236,13 @@ def greet_current_user(postback)
 
   current_user = current_user.nil? ? User.create(email: "#{user_psid}@mail.com", password: "123456", psid: user_psid) : current_user
 
-  url = "https://graph.facebook.com/v2.6/#{user_psid}?fields=first_name&access_token=#{ENV['ACCESS_TOKEN']}"
+  url = "https://graph.facebook.com/v2.6/#{user_psid}?fields=first_name,last_name&access_token=#{ENV['ACCESS_TOKEN']}"
   infos_serialized = open(url).read
   user_infos = JSON.parse(infos_serialized)
   first_name = user_infos["first_name"]
+  last_name = user_infos["last_name"]
   current_user.first_name = first_name
+  current_user.last_name = last_name
   current_user.save
 
   postback.reply(
