@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171209151338) do
+ActiveRecord::Schema.define(version: 20171211144230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,25 @@ ActiveRecord::Schema.define(version: 20171209151338) do
     t.float "latitude"
     t.float "longitude"
     t.string "img_domain"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "domain_id"
+    t.string "flat_id_homeaway"
+    t.string "flat_title"
+    t.text "flat_photo"
+    t.float "flat_price_by_night"
+    t.float "flat_ratings"
+    t.string "flat_location"
+    t.string "car_id_drivy"
+    t.float "car_price"
+    t.string "car_title"
+    t.text "car_photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain_id"], name: "index_offers_on_domain_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -74,6 +93,8 @@ ActiveRecord::Schema.define(version: 20171209151338) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "offers", "domains"
+  add_foreign_key "offers", "users"
   add_foreign_key "orders", "domains"
   add_foreign_key "orders", "users"
 end

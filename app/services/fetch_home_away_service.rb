@@ -8,13 +8,14 @@ class FetchHomeAwayService
 
   def call
 
-    base_url_search = 'https://ws.homeaway.com/public/search?'
+    base_url_search = 'https://ws.homeaway.com/public/search'
 
     headers = {
       'Authorization' => ENV['HOMEAWAY_TOKEN'],
     }
 
     query_params = {
+      locale: 'fr',
       minSleeps: @attributes[:guests_number],
       centerPointLongitude: @attributes[:domain].longitude,
       centerPointLatitude: @attributes[:domain].latitude,
@@ -26,13 +27,14 @@ class FetchHomeAwayService
       currencyCode: 'EUR'
     }
 
-    url = base_url_search + 'locale=fr'
-
+    params = []
     query_params.each do |k, v|
-      url += '&' + k.to_s + '=' + v.to_s
+      params << "#{k}=#{v}"
     end
 
-    listings_serialized = open(url, headers).read
+    url_homeaway = "#{base_url_search}?#{params.join("&")}"
+
+    listings_serialized = open(url_homeaway, headers).read
     listings = JSON.parse(listings_serialized)
     available_flats = listings['entries']
 
@@ -46,7 +48,7 @@ class FetchHomeAwayService
     flat = best_rated_available_flats.first
     return unless flat
 
-    f = Flat.new(
+    Flat.new(
       id_homeaway: flat['listingId'],
       location: flat['location']['city'],
       price_by_night: flat['priceQuote']['averageNightly'].to_f.ceil,
