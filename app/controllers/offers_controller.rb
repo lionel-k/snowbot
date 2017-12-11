@@ -23,6 +23,11 @@ class OffersController < ApplicationController
 
     @offers = build_package
     @order = Order.new
+
+    # respond_to do |format|
+    #   format.html { redirect_to eee_path }
+    #   format.json
+    # end
   end
 
   def search_cars(address)
