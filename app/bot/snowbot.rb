@@ -1,3 +1,5 @@
+require_relative 'helpers'
+
 require 'json'
 require 'open-uri'
 
@@ -17,38 +19,12 @@ Facebook::Messenger::Profile.set({
     }, access_token: ENV['ACCESS_TOKEN'])
 
 Bot.on :postback do |postback|
-  p postback
   if postback.payload == 'get_started'
 
-    user_psid = postback.sender["id"]
+    greet_current_user(postback)
 
-    # Create a new user or find an existing one
-    current_user = User.where(psid: user_psid).first
+    ask_for_the_mountain_chain(postback)
 
-    current_user = current_user.nil? ? User.create(email: "#{user_psid}@mail.com", password: "123456", psid: user_psid) : current_user
-
-    url = "https://graph.facebook.com/v2.6/#{user_psid}?fields=first_name&access_token=#{ENV['ACCESS_TOKEN']}"
-    infos_serialized = open(url).read
-    user_infos = JSON.parse(infos_serialized)
-    first_name = user_infos["first_name"]
-    current_user.first_name = first_name
-    current_user.save
-
-    postback.reply(
-      text: "Hello #{first_name} :) Ready to book your next ski trip? 🏂",
-      )
-
-    postback.reply(
-      text: 'Indicate the mountain chain where you\'d like to go skiing!',
-      quick_replies: Domain.select(:mountain_chain).distinct.map do |domain|
-        {
-          content_type: 'text',
-          title: "#{domain.mountain_chain.gsub("-"," ").upcase}",
-          payload: 'mountain_chain'
-        }
-      end
-
-      )
   end
 end
 
@@ -57,27 +33,59 @@ Bot.on :message do |message|
   user_psid = message.sender["id"]
   current_user = User.where(psid: user_psid).first
   case message.quick_reply
+
   when "mountain_chain"
-    mountain_chain = message.text.downcase.gsub(" ","-")
+    handle_mountain_chain_input(message, current_user)
 
-    current_user.query = { mountain_chain: mountain_chain }
-    current_user.save
-
-    message.reply(
-      text: 'Please indicate a precise location where you\'d like to pick up the rental car 🚙',
-      quick_replies:[
-        {
-          content_type: "location",
-          payload: 'location'
-        }
-      ]
-      )
   when "checkin"
-    case message.text
-    when "Tomorrow"
-      date_checkin = Date.today + 1
-    when "In 2 days"
-      date_checkin = Date.today + 2
+    handle_checkin_input(message, current_user)
+
+  when "checkout"
+    handle_checkout_input(message, current_user)
+
+  when "guests_number"
+    handle_guests_number_input(message, current_user)
+
+    display_waiting_message(message, current_user)
+    display_offers(message, current_user)
+
+  else
+    unless message.messaging["message"]["attachments"].nil?
+      handle_location_input(message, current_user)
+    else
+      message.reply(
+        text: "Sorry #{current_user.first_name}. I didnt understand the request",
+        )
+
+    end
+  end
+
+end
+
+
+def handle_mountain_chain_input(message, current_user)
+  mountain_chain = message.text.downcase.gsub(" ","-")
+
+  current_user.query = { mountain_chain: mountain_chain }
+  current_user.save
+
+  message.reply(
+    text: 'Please indicate a precise location where you\'d like to pick up the rental car 🚙',
+    quick_replies:[
+      {
+        content_type: "location",
+        payload: 'location'
+      }
+    ]
+    )
+end
+
+def handle_checkin_input(message, current_user)
+  case message.text
+  when "Tomorrow"
+    date_checkin = Date.today + 1
+  when "In 2 days"
+    date_checkin = Date.today + 2
     else # In 3 days
       date_checkin = Date.today + 3
     end
@@ -96,111 +104,147 @@ Bot.on :message do |message|
         }
       end
       )
-  when "checkout"
-    # checkout = message.text
-    number_of_days = message.text.split.first.to_i
-    checkout = (Date.today + number_of_days).strftime("%Y-%m-%d")
+end
 
-    current_user.query = current_user.query.merge({ checkout: checkout })
-    current_user.save
+def handle_checkout_input(message, current_user)
+  number_of_days = message.text.split.first.to_i
+  checkout = (Date.today + number_of_days).strftime("%Y-%m-%d")
 
-    message.reply(
-      text: 'How many people are going with you?',
-      quick_replies: [2, 3, 4].map do |number|
-        {
-          title: "#{number}",
-          content_type: "text",
-          payload: 'guests_number'
-        }
-      end
+  current_user.query = current_user.query.merge({ checkout: checkout })
+  current_user.save
 
-      )
+  message.reply(
+    text: 'How many people are going with you?',
+    quick_replies: [2, 3, 4].map do |number|
+      {
+        title: "#{number}",
+        content_type: "text",
+        payload: 'guests_number'
+      }
+    end
 
-  when "guests_number"
-    guests_number = message.text
-    current_user.query = current_user.query.merge({ guests_number: guests_number })
-    current_user.save
+    )
+end
 
-    user_psid = message.sender["id"]
-    current_user = User.where(psid: user_psid).first
 
-    message.reply(
-      text: "#{current_user.first_name}, we are searching for you the best offers ..."
-      )
-    message.typing_on
+def handle_location_input(message, current_user)
+  location = message.messaging["message"]["attachments"][0]["payload"]["coordinates"]
+  # p location {"lat"=>48.8648441, "long"=>2.3798836}
+  current_user.query = current_user.query.merge({ location: location })
+  current_user.save
 
-    offers_service = CreateOffersService.new(
-      mountain_chain: current_user.query['mountain_chain'],
-      start_city: "7 Rue Perronet 75007 Paris",
-      checkin: [current_user.query['checkin']],
-      checkout: [current_user.query['checkout']],
-      guests_number: current_user.query['guests_number']
-      )
+  message.reply(
+    text: 'When do you want to leave?',
+    quick_replies: ['Tomorrow', 'In 2 days', 'In 3 days'].map do |duration|
+      {
+        title: "#{duration}",
+        content_type: "text",
+        payload: 'checkin'
+      }
+    end
+    )
+end
 
-    offers = offers_service.call
 
-    message.reply(
-    {
-      attachment: {
-        type:"template",
-        payload: {
-          template_type:"generic",
-          elements:
-          offers.map do |offer|
-            {
-              title: offer.domain.name + " | " + offer.flat_title[0..29] + "... | " + offer.car_title,
-              image_url: offer.domain.img_domain,
-              subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
-              default_action: {
-                type: "web_url",
-                url: "https://859a9313.ngrok.io/",
-                messenger_extensions: true,
-                webview_height_ratio: "tall",
-                fallback_url: "https://859a9313.ngrok.io/"
-                },
-                buttons:[
+def handle_guests_number_input(message, current_user)
+  guests_number = message.text
+  current_user.query = current_user.query.merge({ guests_number: guests_number })
+  current_user.save
+end
+
+
+def display_waiting_message(message, current_user)
+  message.reply(
+    text: "#{current_user.first_name}, we are searching for you the best offers ... :)"
+    )
+  message.typing_on
+end
+
+
+def display_offers(message, current_user)
+  offers_service = CreateOffersService.new(
+        mountain_chain: current_user.query['mountain_chain'],
+        start_city: "7 Rue Perronet 75007 Paris",
+        checkin: [current_user.query['checkin']],
+        checkout: [current_user.query['checkout']],
+        guests_number: current_user.query['guests_number']
+        )
+
+      offers = offers_service.call
+
+  message.reply(
+  {
+    attachment: {
+      type:"template",
+      payload: {
+        template_type:"generic",
+        elements:
+        offers.map do |offer|
+          {
+            title: offer.domain.name + " | " + offer.flat_title[0..29] + "... | " + offer.car_title,
+            image_url: offer.domain.img_domain,
+            subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
+            default_action: {
+              type: "web_url",
+              url: "https://859a9313.ngrok.io/",
+              messenger_extensions: true,
+              webview_height_ratio: "tall",
+              fallback_url: "https://859a9313.ngrok.io/"
+              },
+              buttons:[
+                {
+                  type:"web_url",
+                  url:"https://859a9313.ngrok.io/offers/#{offer.id}",
+                  title:"Pack in details"
+                  },
                   {
                     type:"web_url",
-                    url:"https://859a9313.ngrok.io/offers/#{offer.id}",
-                    title:"Pack in details"
-                    },
-                    {
-                      type:"web_url",
-                      url: "https://859a9313.ngrok.io/orders/5/payments/new",
-                      title:"Book this trip !"
-                        # payload:"DEVELOPER_DEFINED_PAYLOAD"
-                      }
-                    ]
-                  }
-                end
+                    url: "https://859a9313.ngrok.io/orders/5/payments/new",
+                    title:"Book this trip !"
+                      # payload:"DEVELOPER_DEFINED_PAYLOAD"
+                    }
+                  ]
+                }
+              end
 
-              }
             }
           }
-          )
-  else
-    unless message.messaging["message"]["attachments"].nil?
-      location = message.messaging["message"]["attachments"][0]["payload"]["coordinates"]
-      # p location {"lat"=>48.8648441, "long"=>2.3798836}
-      current_user.query = current_user.query.merge({ location: location })
-      current_user.save
+        }
+  )
+end
 
-      message.reply(
-        text: 'When do you want to leave?',
-        quick_replies: ['Tomorrow', 'In 2 days', 'In 3 days'].map do |duration|
-          {
-            title: "#{duration}",
-            content_type: "text",
-            payload: 'checkin'
-          }
-        end
-        )
-    else
-      message.reply(
-        text: "Sorry #{current_user.first_name}. I didnt understand the request",
+
+def ask_for_the_mountain_chain(postback)
+  postback.reply(
+    text: 'Indicate the mountain chain where you\'d like to go skiing!',
+    quick_replies: Domain.select(:mountain_chain).distinct.map do |domain|
+      {
+        content_type: 'text',
+        title: "#{domain.mountain_chain.gsub("-"," ").upcase}",
+        payload: 'mountain_chain'
       }
-
     end
-  end
 
+    )
+end
+
+
+def greet_current_user(postback)
+  user_psid = postback.sender["id"]
+
+  # Create a new user or find an existing one
+  current_user = User.where(psid: user_psid).first
+
+  current_user = current_user.nil? ? User.create(email: "#{user_psid}@mail.com", password: "123456", psid: user_psid) : current_user
+
+  url = "https://graph.facebook.com/v2.6/#{user_psid}?fields=first_name&access_token=#{ENV['ACCESS_TOKEN']}"
+  infos_serialized = open(url).read
+  user_infos = JSON.parse(infos_serialized)
+  first_name = user_infos["first_name"]
+  current_user.first_name = first_name
+  current_user.save
+
+  postback.reply(
+    text: "Hello #{first_name} :) Ready to book your next ski trip? 🏂",
+  )
 end
