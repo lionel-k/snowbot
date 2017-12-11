@@ -2,89 +2,23 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    (params[:checkin].first.blank? || params[:checkout].first.blank? || params[:start_city].blank?)  ? (redirect_to root_path) : search_offers
-  end
-
-  def search_offers
-    @mountain_chain = params[:mountain_chain]
-    @guests_number = params[:guests_number]
-    @checkin = Date.parse(params[:checkin].first)
-    @checkout = Date.parse(params[:checkout].first)
-    @start_city = params[:start_city]
-
-    @flats = search_flats(
-      @mountain_chain,
-      @checkin,
-      @checkout,
-      @guests_number
-    )
-
-    @cars = search_cars(@start_city)
-
-    @offers = build_package
-    @order = Order.new
-
-    # respond_to do |format|
-    #   format.html { redirect_to eee_path }
-    #   format.json
-    # end
-  end
-
-  def search_cars(address)
-    results = Geocoder.search(address, :params => {:countrycodes => "fr"})
-    latitude = results.first.data["geometry"]["location"]["lat"]
-    longitude = results.first.data["geometry"]["location"]["lng"]
-    checkin = "2017-12-28"
-    checkout = "2017-12-31"
-    search = FetchDrivySearch.new(
-        checkin: checkin,
-        checkout: checkout,
-        address: address,
-        latitude: latitude,
-        longitude: longitude
-      )
-    cars = search.call
-  end
-
-  def search_flats(mountain_chain, checkin, checkout, guests_number)
-    domains = Domain.
-      where("snow_depth_low > ? AND mountain_chain = ?", "30", mountain_chain).
-      order(snow_depth_low: :desc)
-    return if domains.empty?
-
-    flats = []
-
-    domains.each do |domain|
-      break if flats.size == 3
-
-      service = FetchHomeAwayService.new(
-        checkin: checkin,
-        checkout: checkout,
-        guests_number: guests_number,
-        domain: domain
+    if params[:checkin].first.blank? || params[:checkout].first.blank? || params[:start_city].blank?
+      redirect_to root_path
+    else
+      @checkin = Date.parse(params[:checkin].first)
+      @checkout = Date.parse(params[:checkout].first)
+      @diff_days = @checkout - @checkin
+      @guests_number = params[:guests_number]
+      offers_service = CreateOffersService.new(
+        mountain_chain: params[:mountain_chain],
+        start_city: params[:start_city],
+        checkin: params[:checkin],
+        checkout: params[:checkout],
+        guests_number: params[:guests_number]
       )
 
-      flat = service.call
-      sleep 1
-      next unless flat
-
-      flat.domain = domain
-      flats << flat
+      @offers = offers_service.call
+      @order = Order.new
     end
-
-    return flats
-  end
-
-  def build_package
-    @diff_days = @checkout.mjd - @checkin.mjd
-    offers = []
-
-    @flats.each_with_index do |flat, index|
-      offer = Offer.new(id: index, car: @cars[index], flat: @flats[index])
-      offer.compute_total(@diff_days)
-      offers << offer
-    end
-
-    return offers
   end
 end
