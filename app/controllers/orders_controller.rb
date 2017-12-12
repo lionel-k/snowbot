@@ -8,19 +8,24 @@ class OrdersController < ApplicationController
   end
 
   def create
+    checkin = Date.parse(@offer.user.query["checkin"])
+    checkout = Date.parse(@offer.user.query["checkout"])
+    guests_number = @offer.user.query["guests_number"]
+    diff_days = checkout.mjd - checkin.mjd
+    car_price = @offer.car_price.to_i
+    car_photo = @offer.car_photo
+    flat_price = @offer.flat_price_by_night.to_i
+    flat_photo = @offer.flat_photo
+    offer_price = @offer.total_price(diff_days).to_i
+
     @order = Order.new(
       user: current_user,
-      car_price: @offer.car_price.to_i,
-      car_photo: @offer.car_photo,
-      flat_price: @offer.flat_price_by_night.to_i,
-      flat_photo: @offer.flat_photo,
-      offer_price: @offer.total_price(@diff_days).to_i,
       domain: @offer.domain,
       drivy_data: { price: car_price, photo: car_photo },
       homeaway_data: { price: flat_price, photo: flat_photo },
       amount: offer_price,
       status: "pending",
-    )
+      )
 
     @order.save
 

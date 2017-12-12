@@ -12,8 +12,8 @@
 
   <hr>
 
-  <% @offers.each do |offer| %>
-  <h2>Top Offer <%= offer.id + 1%></h2>
+  <% @offers.each_with_index do |offer, index| %>
+  <h2>Top Offer <%= index + 1%></h2>
 
 
 
@@ -84,16 +84,8 @@
   </div>
   <br />
   <center>
-    <%= simple_form_for(@order)  do |f| %>
-    <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car_price } %>
-    <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car_photo } %>
-    <%= f.input :flat_price, :as => :hidden, :input_html => { :value => offer.flat_price_by_night } %>
-    <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat_photo } %>
-    <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price(@diff_days) } %>
-    <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.domain.id } %>
-    <%= f.button :submit, "Book your trip", class: "btn-custom" %>
+    <%= link_to "See details", offer_path(offer), class: "btn-custom" %>
     <br><br />
-    <% end %>
   </center>
   <% end %>
   <br><br />

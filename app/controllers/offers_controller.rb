@@ -5,6 +5,7 @@ class OffersController < ApplicationController
     if params[:checkin].first.blank? || params[:checkout].first.blank? || params[:start_city].blank? || params[:guests_number].blank?
       redirect_to root_path
     else
+      @start_city = params["start_city"]
       @checkin = Date.parse(params[:checkin].first)
       @checkout = Date.parse(params[:checkout].first)
       @diff_days = @checkout.mjd - @checkin.mjd
