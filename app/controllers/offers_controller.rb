@@ -2,7 +2,7 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    if params[:checkin].first.blank? || params[:checkout].first.blank? || params[:start_city].blank?
+    if params[:checkin].first.blank? || params[:checkout].first.blank? || params[:start_city].blank? || params[:guests_number].blank?
       redirect_to root_path
     else
       @checkin = Date.parse(params[:checkin].first)

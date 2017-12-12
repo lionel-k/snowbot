@@ -19,6 +19,9 @@ Facebook::Messenger::Profile.set({
     }, access_token: ENV['ACCESS_TOKEN'])
 
 Bot.on :postback do |postback|
+  puts "-- postback"
+  p postback
+
   if postback.payload == 'get_started'
 
     greet_current_user(postback)
@@ -29,28 +32,31 @@ Bot.on :postback do |postback|
 end
 
 Bot.on :message do |message|
+  puts "-- message"
+  p message
 
   user_psid = message.sender["id"]
-  current_user = User.where(psid: user_psid).first
+  current_user = find_or_create_user(user_psid)
+
   case message.quick_reply
 
-  when "mountain_chain"
+  when "mountain_chain" # STEP 1
     handle_mountain_chain_input(message, current_user)
 
-  when "checkin"
+  when "checkin" # STEP 3
     handle_checkin_input(message, current_user)
 
-  when "checkout"
+  when "checkout" # STEP 4
     handle_checkout_input(message, current_user)
 
-  when "guests_number"
+  when "guests_number" # STEP 5 - FINAL
     handle_guests_number_input(message, current_user)
 
     display_waiting_message(message, current_user)
     display_offers(message, current_user)
 
   else
-    unless message.messaging["message"]["attachments"].nil?
+    unless message.messaging["message"]["attachments"].nil? # STEP 2
       handle_location_input(message, current_user)
     else
       message.reply(
@@ -167,58 +173,64 @@ end
 
 
 def display_offers(message, current_user)
-  offers_service = CreateOffersService.new(
-        mountain_chain: current_user.query['mountain_chain'],
-        start_city: "7 Rue Perronet 75007 Paris",
-        checkin: [current_user.query['checkin']],
-        checkout: [current_user.query['checkout']],
-        guests_number: current_user.query['guests_number'],
-        user: current_user
-        )
+  # offers_service = CreateOffersService.new(
+  #   mountain_chain: current_user.query['mountain_chain'],
+  #   start_city: "7 Rue Perronet 75007 Paris",
+  #   checkin: [current_user.query['checkin']],
+  #   checkout: [current_user.query['checkout']],
+  #   guests_number: current_user.query['guests_number'],
+  #   user: current_user
+  #   )
 
-      offers = offers_service.call
-      # offers = Offer.first(3)
+  # offers = offers_service.call
+  # offers = Offer.first(3)
 
-  message.reply(
-  {
-    attachment: {
-      type:"template",
-      payload: {
-        template_type:"generic",
-        elements:
-        offers.map do |offer|
-          {
-            title: offer.domain.name + " | " + offer.flat_title[0..29] + "... | " + offer.car_title,
-            image_url: offer.domain.img_domain,
-            subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
-            default_action: {
-              type: "web_url",
-              url: "https://www.snowbot-ai.com",
-              messenger_extensions: true,
-              webview_height_ratio: "tall",
-              fallback_url: "https://www.snowbot-ai.com"
-              },
-              buttons:[
-                {
-                  type:"web_url",
-                  url:"http://localhost:3000/offers/#{offer.id}",
-                  title:"See more details"
-                  }
-                  # ,
-                  # {
-                  #   type:"web_url",
-                  #   url: "https://859a9313.ngrok.io/orders/5/payments/new",
-                  #   title:"Book this trip !"
-                  #     # payload:"DEVELOPER_DEFINED_PAYLOAD"
-                  #   }
-                  ]
-                }
-              end
+  # if offers.any?
+  #   message.reply(
+  #   {
+  #     attachment: {
+  #       type:"template",
+  #       payload: {
+  #         template_type:"generic",
+  #         elements:
+  #         offers.map do |offer|
+  #           {
+  #             title: offer.domain.name + " | " + offer.flat_title[0..29] + "... | " + offer.car_title,
+  #             image_url: offer.domain.img_domain,
+  #             subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
+  #             default_action: {
+  #               type: "web_url",
+  #               url: "https://www.snowbot-ai.com",
+  #               messenger_extensions: true,
+  #               webview_height_ratio: "tall",
+  #               fallback_url: "https://www.snowbot-ai.com"
+  #               },
+  #               buttons:[
+  #                 {
+  #                   type:"web_url",
+  #                   url:"http://localhost:3000/offers/#{offer.id}",
+  #                   title:"See more details"
+  #                   }
+  #                   # ,
+  #                   # {
+  #                   #   type:"web_url",
+  #                   #   url: "https://859a9313.ngrok.io/orders/5/payments/new",
+  #                   #   title:"Book this trip !"
+  #                   #     # payload:"DEVELOPER_DEFINED_PAYLOAD"
+  #                   #   }
+  #                   ]
+  #                 }
+  #               end
 
-            }
-          }
-        }
-  )
+  #             }
+  #           }
+  #         }
+  #   )
+  # else
+    message.reply(
+      text: "Sorry #{current_user.first_name}. We couldn't find any offer."
+    )
+  # end
 end
 
 
@@ -239,11 +251,7 @@ end
 
 def greet_current_user(postback)
   user_psid = postback.sender["id"]
-
-  # Create a new user or find an existing one
-  current_user = User.find_by(psid: user_psid)
-
-  current_user = current_user.nil? ? User.create(email: "#{user_psid}@mail.com", password: "123456", psid: user_psid) : current_user
+  current_user = find_or_create_user(user_psid)
 
   url = "https://graph.facebook.com/v2.6/#{user_psid}?fields=first_name,last_name&access_token=#{ENV['ACCESS_TOKEN']}"
   infos_serialized = open(url).read
@@ -257,4 +265,10 @@ def greet_current_user(postback)
   postback.reply(
     text: "Hello #{first_name} :) Ready to book your next ski trip? 🏂",
   )
+end
+
+# Create a new user or find an existing one
+def find_or_create_user(user_psid)
+  current_user = User.find_by(psid: user_psid)
+  current_user ||= User.create(email: "#{user_psid}@mail.com", password: "123456", psid: user_psid)
 end
