@@ -11,7 +11,7 @@ class CreateOffersService
     domains_service = SelectDomainsService.new(mountain_chain: @attributes[:mountain_chain])
 
     domains = domains_service.call
-    return if domains.empty?
+    return [] if domains.empty?
 
     # search flats
     flats_service = SearchFlatsService.new(
@@ -22,7 +22,7 @@ class CreateOffersService
     )
 
     flats = flats_service.call
-    return if flats.empty?
+    return [] if flats.empty?
 
     # search cars
     nb_cars = flats.length
@@ -34,7 +34,7 @@ class CreateOffersService
     )
 
     cars = cars_service.call
-    return if cars.empty?
+    return [] if cars.empty?
 
     # return max 3 offers
     diff_days = Date.parse(checkout).mjd - Date.parse(checkin).mjd
