@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container wrap-show">
 
-  <br>
-  <h1><%= @offer.user.first_name %>,</h1>
-  <h2>Here are the details of the offer</h2>
+  <br><br>
+  <h2><center><%= @offer.user.first_name %>,</center></h2>
+  <h4><center>Here are the details of the offer, ready to go?</center></h4>
   <br>
   <p>
     <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
@@ -15,7 +15,12 @@
   <p>
     <span>
       For <strong><%= @guests_number %> persons</strong>
+      <% if @offer.domain.is_sunny == false %>
+        | It's a sunny day today
+      <% end %>
+       in <%= @offer.domain.name %>, <%= @offer.domain.mountain_chain %>
     </span>
+
   </p>
   <br>
 
@@ -24,9 +29,8 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-
-            <%= image_tag @offer.domain.img_domain, :class => "center-cropped" %>
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.domain.img_domain %>);">
+            <%#= image_tag @offer.domain.img_domain, :class => "center-cropped" %>
             <div class="card-category"><h2>Resort</h2></div>
             <div class="card-description">
               <h2><%= @offer.domain.name %></h2>
@@ -46,14 +50,18 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-            <%= image_tag @offer.flat_photo, :class => "center-cropped" %>
+          <div class="card-body center-cropped" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.flat_photo %>);">
+            <%#= image_tag @offer.flat_photo, :class => "center-cropped" %>
             <div class="card-category"><h2>Housing</h2></div>
             <div class="card-description">
+              <h2><%= @offer.flat_bedrooms_nb %> bedrooms</h2>
             </div>
           </div>
           <div class="card-footer">
-            <h5 class="card-offer-details"><%= @offer.flat_title %></h5>
+            <h5 class="card-offer-details">
+              <%= @offer.flat_title %>
+              <p>Flat rating: <%= @offer.flat_ratings %></p>
+            </h5>
             <h5 class="card-offer-price"><strong><%= @offer.flat_price_by_night %>€/night</strong></h5>
           </div>
         </div>
@@ -61,8 +69,8 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-            <%= image_tag @offer.car_photo, :class => "center-cropped", :align=> "middle"%>
+          <div class="card-body center-cropped" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.car_photo %>);">
+            <%#= image_tag @offer.car_photo, :class => "center-cropped", :align=> "middle"%>
             <div class="card-category"><h2>Car</h2></div>
             <div class="card-description">
             </div>

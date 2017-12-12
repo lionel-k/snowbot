@@ -24,7 +24,8 @@ class FetchHomeAwayService
       availabilityEnd: @attributes[:checkout],
       reservation_en_ligne: 'Instant book',
       sort: 'prices:asc',
-      currencyCode: 'EUR'
+      currencyCode: 'EUR',
+      imageSize: 'MEDIUM'
     }
 
     params = []
@@ -47,14 +48,15 @@ class FetchHomeAwayService
 
     flat = best_rated_available_flats.first
     return unless flat
-
     Flat.new(
       id_homeaway: flat['listingId'],
       location: flat['location']['city'],
       price_by_night: flat['priceQuote']['averageNightly'].to_f.ceil,
       ratings: flat['reviewAverage'],
       photo: flat['thumbnail']['uri'],
-      title: flat['headline']
+      title: flat['headline'],
+      bedrooms_nb: flat['bedrooms']
+
     )
   end
 end
