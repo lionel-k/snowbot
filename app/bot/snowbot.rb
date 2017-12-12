@@ -5,7 +5,7 @@ include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
   whitelisted_domains: [
-    "https://859a9313.ngrok.io",
+    "https://fd044c33.ngrok.io",
     # "http://localhost:3000/",
     "https://www.snowbot-ai.com",
     "https://odis.homeaway.com",
@@ -65,7 +65,7 @@ end
 
 def handle_mountain_chain_input(message, current_user)
   mountain_chain = message.text.downcase.gsub(" ","-")
-
+  # p mountain_chain
   current_user.query = { mountain_chain: mountain_chain }
   current_user.save
 
@@ -118,7 +118,7 @@ def handle_checkout_input(message, current_user)
   current_user.save
 
   message.reply(
-    text: 'How many people are going with you?',
+    text: 'How many of you are going ?',
     quick_replies: [2, 3, 4].map do |number|
       {
         title: "#{number}",
@@ -151,8 +151,9 @@ end
 
 
 def handle_guests_number_input(message, current_user)
-  guests_number = message.text.to_i + 1 # adding the current user to the number of guests
+  guests_number = message.text
   current_user.query = current_user.query.merge({ guests_number: guests_number })
+  # current_user.query = { guests_number: guests_number }
   current_user.save
 end
 
@@ -176,6 +177,7 @@ def display_offers(message, current_user)
         )
 
       offers = offers_service.call
+      # offers = Offer.first(3)
 
   message.reply(
   {

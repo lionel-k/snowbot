@@ -14,7 +14,8 @@ class OffersController < ApplicationController
         start_city: params[:start_city],
         checkin: params[:checkin],
         checkout: params[:checkout],
-        guests_number: params[:guests_number]
+        guests_number: params[:guests_number],
+        user: User.first # Has to be the first user which is the default one
       )
 
       @offers = offers_service.call
