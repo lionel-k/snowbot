@@ -1,0 +1,63 @@
+
+<div class="container">
+<br><br>
+  <h1>Your trips</h1>
+  <hr>
+  <h4>Email: <%= current_user.email %></h4>
+
+  <h4><%= "First Name: #{current_user.first_name}" unless current_user.first_name.nil? %></h4>
+  <h4><%= "Last Name: #{current_user.last_name}" unless current_user.last_name.nil? %></h4>
+
+
+    <div class="row separator">
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card-order">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag order.homeaway_data["photo"], :class => "center-cropped" %>
+            <div class="card-category"><h2>Housing</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer" style="background-image: url('<%= image_path "logo_homeaway.png" %>');">
+            <div class="card-links">
+              <h5></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card-order">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag order.drivy_data["photo"], :class => "center-cropped", :align=> "middle"%>
+            <div class="card-category"><h2>Car</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer" style="background-image: url('<%= image_path "logo_drivy.png" %>');">
+            <div class="card-links">
+              <h5></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card-order">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "snowbot.png" %>');">
+            <div class="card-category"><h2>Status: <%= order.status %></h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer-order">
+
+              <h5>Amount: <%= humanized_money_with_symbol(order.amount) %></h5>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
