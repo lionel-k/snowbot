@@ -6,7 +6,6 @@ class CreateOffersService
   def call
     checkin = @attributes[:checkin].first
     checkout = @attributes[:checkout].first
-
     # select domains
     domains_service = SelectDomainsService.new(mountain_chain: @attributes[:mountain_chain])
 
@@ -28,6 +27,7 @@ class CreateOffersService
     nb_cars = flats.length
     cars_service = SearchCarsService.new(
       start_city: @attributes[:start_city],
+      start_location: @attributes[:start_location],
       checkin: checkin,
       checkout: checkout,
       nb_cars: nb_cars
