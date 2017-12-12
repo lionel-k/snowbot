@@ -90,7 +90,7 @@
     <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat_photo } %>
     <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price(@diff_days) } %>
     <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.domain.id } %>
-    <%= f.button :submit, "Book your trip", class: "btn-custom" %>
+    <%= f.button :submit, "See details", class: "btn-custom" %>
     <br><br />
     <% end %>
   </center>
