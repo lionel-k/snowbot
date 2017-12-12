@@ -1,0 +1,101 @@
+<div class="container">
+
+  <br>
+  <h1><%= @offer.user.first_name %>,</h1>
+  <h2>Here are the details of the offer</h2>
+  <br>
+  <p>
+    <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
+    to
+    <span><strong><%= @checkout.strftime("%A, %b %d") %></strong></span>
+    <span>
+      (<%= "#{@diff_days}"%> <%= 'night'.pluralize %>)
+    </span>
+  </p>
+  <p>
+    <span>
+      For <strong><%= @guests_number %> persons</strong>
+    </span>
+  </p>
+  <br>
+
+  <div class='offer-container'>
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+
+            <%= image_tag @offer.domain.img_domain, :class => "center-cropped" %>
+            <div class="card-category"><h2>Resort</h2></div>
+            <div class="card-description">
+              <h2><%= @offer.domain.name %></h2>
+              <p><%= @offer.domain.mountain_chain %></p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-offer-details">
+              <h5>Snow depth at resort:</h5>
+              <h5><strong><%= @offer.domain.snow_depth_low %> cm</strong></h5>
+              <h5>Snow depth at the top:</h5>
+              <h5><strong><%= @offer.domain.snow_depth_high %> cm</strong></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag @offer.flat_photo, :class => "center-cropped" %>
+            <div class="card-category"><h2>Housing</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer">
+            <h5 class="card-offer-details"><%= @offer.flat_title %></h5>
+            <h5 class="card-offer-price"><strong><%= @offer.flat_price_by_night %>€/night</strong></h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+            <%= image_tag @offer.car_photo, :class => "center-cropped", :align=> "middle"%>
+            <div class="card-category"><h2>Car</h2></div>
+            <div class="card-description">
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-offer-details">
+              <h5><%= @offer.car_title %></h5>
+              <h5>Start city: <%= @start_city %></h5>
+            </div>
+            <h5 class="card-offer-price"><strong><%= @offer.car_price %>€ for your trip</strong></h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="total-order">
+    <h5><strong>Total: <%= @offer.total_price(@diff_days) %>€ - <em><%= @offer.total_price(@diff_days).fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
+  </div>
+  <br>
+  <center>
+    <%= simple_form_for(@order)  do |f| %>
+    <%= f.input :car_price, :as => :hidden, :input_html => { :value => @offer.car_price } %>
+    <%= f.input :car_photo, :as => :hidden, :input_html => { :value => @offer.car_photo } %>
+    <%= f.input :flat_price, :as => :hidden, :input_html => { :value => @offer.flat_price_by_night } %>
+    <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => @offer.flat_photo } %>
+    <%= f.input :offer_price, :as => :hidden, :input_html => { :value => @offer.total_price(@diff_days) } %>
+    <%= f.input :domain, :as => :hidden, :input_html => { :value => @offer.domain.id } %>
+    <%= f.button :submit, "Book your trip", class: "btn-custom" %>
+    <% end %>
+  </center>
+
+
+</div>
+

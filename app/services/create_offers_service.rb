@@ -43,7 +43,7 @@ class CreateOffersService
     flats.each_with_index do |flat, index|
       car = cars[index]
       offer = Offer.new(
-        user: User.first,
+        user: @attributes[:user],
         domain: flat.domain,
         flat_id_homeaway: flat.id_homeaway,
         flat_title: flat.title,
