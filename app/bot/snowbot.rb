@@ -4,7 +4,9 @@ require 'open-uri'
 include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
-  whitelisted_domains: ["https://859a9313.ngrok.io",
+  whitelisted_domains: [
+    "https://859a9313.ngrok.io",
+    # "http://localhost:3000/",
     "https://www.snowbot-ai.com",
     "https://odis.homeaway.com",
     "https://drivy.imgix.net",
@@ -81,14 +83,13 @@ end
 def handle_checkin_input(message, current_user)
   case message.text
   when "Tomorrow"
-    date_checkin = Date.today + 1
+    checkin = 1
   when "In 2 days"
-    date_checkin = Date.today + 2
+    checkin = 2
     else # In 3 days
-      date_checkin = Date.today + 3
+      checkin = 3
     end
 
-    checkin = date_checkin.strftime("%Y-%m-%d")
     current_user.query = current_user.query.merge({ checkin: checkin })
     current_user.save
 
@@ -106,8 +107,13 @@ end
 
 def handle_checkout_input(message, current_user)
   number_of_days = message.text.split.first.to_i
-  checkout = (Date.today + number_of_days).strftime("%Y-%m-%d")
 
+  date_checkin = Date.today + current_user.query["checkin"].to_i
+
+  checkin = date_checkin.strftime("%Y-%m-%d")
+  checkout = (date_checkin + number_of_days).strftime("%Y-%m-%d")
+
+  current_user.query = current_user.query.merge({ checkin: checkin })
   current_user.query = current_user.query.merge({ checkout: checkout })
   current_user.save
 
@@ -185,23 +191,24 @@ def display_offers(message, current_user)
             subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
             default_action: {
               type: "web_url",
-              url: "https://859a9313.ngrok.io/",
+              url: "https://www.snowbot-ai.com",
               messenger_extensions: true,
               webview_height_ratio: "tall",
-              fallback_url: "https://859a9313.ngrok.io/"
+              fallback_url: "https://www.snowbot-ai.com"
               },
               buttons:[
                 {
                   type:"web_url",
-                  url:"https://859a9313.ngrok.io/offers/#{offer.id}",
-                  title:"Pack in details"
-                  },
-                  {
-                    type:"web_url",
-                    url: "https://859a9313.ngrok.io/orders/5/payments/new",
-                    title:"Book this trip !"
-                      # payload:"DEVELOPER_DEFINED_PAYLOAD"
-                    }
+                  url:"http://localhost:3000/offers/#{offer.id}",
+                  title:"See more details"
+                  }
+                  # ,
+                  # {
+                  #   type:"web_url",
+                  #   url: "https://859a9313.ngrok.io/orders/5/payments/new",
+                  #   title:"Book this trip !"
+                  #     # payload:"DEVELOPER_DEFINED_PAYLOAD"
+                  #   }
                   ]
                 }
               end
