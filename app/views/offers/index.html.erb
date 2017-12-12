@@ -12,8 +12,8 @@
 
   <hr>
 
-  <% @offers.each do |offer| %>
-  <h2>Top Offer <%= offer.id + 1%></h2>
+  <% @offers.each_with_index do |offer, index| %>
+  <h2>Top Offer <%= index + 1%></h2>
 
 
 

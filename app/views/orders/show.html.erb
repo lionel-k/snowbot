@@ -1,6 +1,5 @@
-
 <div class="container">
-<br><br>
+
   <h1>Your trips</h1>
   <hr>
   <h4>Email: <%= current_user.email %></h4>
@@ -8,7 +7,7 @@
   <h4><%= "First Name: #{current_user.first_name}" unless current_user.first_name.nil? %></h4>
   <h4><%= "Last Name: #{current_user.last_name}" unless current_user.last_name.nil? %></h4>
 
-
+  <% current_user.orders.each do |order| %>
     <div class="row separator">
 
       <div class="col-xs-12 col-sm-4">
@@ -59,5 +58,5 @@
         </div>
       </div>
     </div>
-
+  <% end %>
 </div>
