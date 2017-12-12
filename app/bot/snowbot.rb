@@ -151,7 +151,7 @@ end
 
 
 def handle_guests_number_input(message, current_user)
-  guests_number = message.text
+  guests_number = message.text.to_i + 1 # adding the current user to the number of guests
   current_user.query = current_user.query.merge({ guests_number: guests_number })
   current_user.save
 end
