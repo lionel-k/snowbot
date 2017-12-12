@@ -2,5 +2,6 @@
 :timeout: 60
 :verbose: true
 :queues:
+  - bot
   - default
   - mailers
