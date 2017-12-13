@@ -56,20 +56,7 @@ Bot.on :message do |message|
       handle_location_input(message, current_user)
     else
       message.reply(
-        text: "Sorry #{current_user.first_name}, I didnt understand the request",
-        buttons: [
-              {
-                type: "postback",
-                title: "Yes!",
-                payload: "yes",
-              },
-              {
-                type: "postback",
-                title: "No!",
-                payload: "no",
-              }
-          ]
-        )
+        text: "Sorry #{current_user.first_name}, I didnt understand the request"
     end
   end
 end
