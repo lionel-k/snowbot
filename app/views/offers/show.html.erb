@@ -49,7 +49,7 @@
     <div class='product-body'>
       <h5><strong>Housing</strong></h5>
       <h6><%= @offer.flat_title[0..40] %></h6>
-      <h6><strong><%= @offer.flat_price_by_night %>€/night</strong></h6>
+      <h6><strong><%= @offer.flat_price_by_night.to_i %>€/night</strong></h6>
     </div>
   </div>
 
@@ -62,12 +62,12 @@
     <div class='product-body'>
       <h5><strong>Car</strong></h5>
       <h6><%= @offer.car_title %></h6>
-      <h6><strong><%= @offer.car_price %>€ for your trip</strong></h6>
+      <h6><strong><%= @offer.car_price.to_i %>€ for your trip</strong></h6>
     </div>
   </div>
 
   <div class="total-order">
-    <h5><strong>Total: <%= @offer.total_price(@diff_days) %>€ - <em><%= @offer.total_price(@diff_days).fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
+    <h5><strong>Total: <%= @offer.total_price(@diff_days).to_i %>€ - <em><%= @offer.total_price(@diff_days).fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
   </div>
 
   <center>
