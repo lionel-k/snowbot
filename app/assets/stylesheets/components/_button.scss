@@ -15,3 +15,16 @@
   background-color: rgba(80, 185, 249, 1);
   color: white;
 }
+
+.btn-img {
+  width: 200px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.btn-img:hover {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
