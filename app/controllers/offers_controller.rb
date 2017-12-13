@@ -31,5 +31,6 @@ class OffersController < ApplicationController
     @checkout = Date.parse(@offer.user.query["checkout"])
     @guests_number = @offer.user.query["guests_number"]
     @diff_days = @checkout.mjd - @checkin.mjd
+    @forecast_data = @offer.domain.forecast_data
   end
 end

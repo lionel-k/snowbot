@@ -3,18 +3,18 @@
   <div class="product">
     <div class='product-body'>
       <h4><center><%= @offer.user.first_name %>,<center/></h4>
-      <h5>Here are the details of the offer:</h5>
-      <p>
+      <h6>Here are the details of the offer:</h6>
+      <h6>
         <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
         to
         <span><strong><%= @checkout.strftime("%A, %b %d") %></strong></span>
         <span>
-          (<%= "#{@diff_days}"%> <%= 'night'.pluralize %>)
+          (<%= "#{@diff_days}"%> <%= 'night'.pluralize(@diff_days) %>)
         </span>
         <span>
        | For <strong><%= @guests_number %> persons</strong>
         </span>
-      </p>
+      </h6>
     </div>
   </div>
 
@@ -23,54 +23,51 @@
       <div class="card-category-bot"></div>
       <div class="card-description-bot">
         <h5><%= @offer.domain.name %></h5>
-        <p><%= @offer.domain.mountain_chain %></p>
+        <p><%= @offer.domain.mountain_chain.gsub("-", " ").titleize { |match|  } %></p>
       </div>
     </div>
     <div class='product-body'>
-      <h5><center>Resort</h5></center>
+      <% img_weather = @offer.domain.is_sunny? ? "sun.png" : "snow.png" %>
+      <h5><strong>Resort</strong> <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%></h5>
       <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
       <h6>Snow at the top: <strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
-      <h6><strong>
-        <% if @offer.domain.is_sunny %>
-          <%= image_tag "sun.png", {class: "img-circle" }%>
-          <% else %>
-          <%= image_tag "snow.png", {class: "img-circle", size: "25x25" }%>
-          <% end %>
-        </strong></h6>
-
+      <h6>Trend:
+        <% @forecast_data.split("|").each do |condition| %>
+          <%= image_tag "#{condition}.png", {class: "img-circle", size: "25x25" }%>
+        <% end %>
+      </h6>
     </div>
   </div>
 
   <div class="product">
     <div class="card-body product-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.flat_photo %>);">
       <div class="card-category-bot"></div>
-      <div class="card-description-bot"><h5><%= @offer.flat_bedrooms_nb %> bedrooms</h5>
-        <p>Flat rating: <%= @offer.flat_ratings %></p>
+      <div class="card-description-bot"><h5><%= "#{@offer.flat_bedrooms_nb }" " bedroom".pluralize(@offer.flat_bedrooms_nb) %></h5>
+        <p>Flat Rating: <%= @offer.flat_ratings %></p>
       </div>
     </div>
     <div class='product-body'>
-      <h5><center>Housing</center></h5>
+      <h5><strong>Housing</strong></h5>
       <h6><%= @offer.flat_title[0..40] %></h6>
-      <h6><strong><%= @offer.flat_price_by_night %>€/night</strong></h6>
+      <h6><strong><%= @offer.flat_price_by_night.to_i %>€/night</strong></h6>
     </div>
   </div>
 
   <div class="product">
     <div class="card-body product-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.car_photo %>);">
       <div class="card-category-bot"></div>
-      <div class="card-description-bot"><h5>2 000km</h5>
+      <div class="card-description-bot"><h5>2.000 kms</h5>
       </div>
     </div>
     <div class='product-body'>
-      <h5><center>Car</center></h5>
-      <h6><%= @offer.car_title[0..40] %>...</h6>
-      <h6>Start city: <%= @start_city %></h6>
-      <h6><strong><%= @offer.car_price %>€ for your trip</strong></h6>
+      <h5><strong>Car</strong></h5>
+      <h6><%= @offer.car_title %></h6>
+      <h6><strong><%= @offer.car_price.to_i %>€ for your trip</strong></h6>
     </div>
   </div>
 
   <div class="total-order">
-    <h5><strong>Total: <%= @offer.total_price(@diff_days) %>€ - <em><%= @offer.total_price(@diff_days).fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
+    <h5><strong>Total: <%= @offer.total_price(@diff_days).to_i %>€ - <em><%= @offer.total_price(@diff_days).fdiv(@guests_number.to_i).to_i %>€ per person</em></strong></h5>
   </div>
 
   <center>
