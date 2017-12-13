@@ -84,6 +84,7 @@ def greet_current_user(postback)
   postback.reply(
     text: "Hello #{first_name} I am SnowBot 🤖 the ski specialist ! Ready to book your next trip? 🏂"
   )
+  sleep(0.5)
   postback.reply(
     attachment:{
       type:"image",
@@ -93,6 +94,7 @@ def greet_current_user(postback)
       }
     }
   )
+  sleep(1)
 end
 
 
