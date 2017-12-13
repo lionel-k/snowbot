@@ -54,7 +54,7 @@ Bot.on :message do |message|
       handle_location_input(message, current_user)
     else
       message.reply(
-        text: "Sorry #{current_user.first_name}, I didnt understand the request",
+        text: "Sorry #{current_user.first_name}, I didnt understand the request"
         )
     end
   end
@@ -82,7 +82,16 @@ def greet_current_user(postback)
   current_user.save
 
   postback.reply(
-    text: "Hello #{first_name} :) Ready to book your next ski trip? 🏂",
+    text: "Hello #{first_name} I am SnowBot 🤖 the ski specialist ! Ready to book your next trip? 🏂"
+  )
+  postback.reply(
+    attachment:{
+      type:"image",
+      payload:{
+        url:"https://media.giphy.com/media/3oxHQiF8d5gF1DqG2s/giphy.gif",
+        is_reusable:true
+      }
+    }
   )
 end
 
@@ -95,7 +104,7 @@ def ask_for_the_mountain_chain(postback)
       text: 'Sorry we currently have no offers available, the bot is in maintenance. Come back later!')
   else
     postback.reply(
-      text: 'Indicate the mountain chain where you\'d like to go skiing!',
+      text: 'Indicate the mountain chain where you\'d like to go skiing! 🏔️',
       quick_replies: domains.map do |domain|
         {
           content_type: 'text',
@@ -114,7 +123,7 @@ def handle_mountain_chain_input(message, current_user)
   current_user.save
 
   message.reply(
-    text: 'Please indicate a precise location where you\'d like to pick up the rental car 🚙',
+    text: 'Please indicate a precise location where you\'d like to pick up the rental car 📍',
     quick_replies:[
       {
         content_type: "location",
@@ -182,7 +191,7 @@ def handle_location_input(message, current_user)
   current_user.save
 
   message.reply(
-    text: 'When do you want to leave?',
+    text: 'When do you want to leave ?',
     quick_replies: ['Tomorrow', 'In 2 days', 'In 3 days'].map do |duration|
       {
         title: "#{duration}",
@@ -203,9 +212,21 @@ end
 
 def search_offers(message, current_user)
   message.reply(
-    text: "#{current_user.first_name}, we are searching the best offers for you ... :)"
+    text: "#{current_user.first_name}, we are searching the best offers for you ... 🔥"
+  )
+  message.reply(
+    attachment:{
+      type:"image",
+      payload:{
+        url:"https://media.giphy.com/media/3o6fJ4yWX1z0ghY316/giphy.gif",
+        is_reusable:true
+      }
+    }
   )
   message.typing_on
+  message.reply(
+    text: "Here are the best options available to you :)"
+  )
   BotOffersCreationJob.perform_later(current_user.id)
 end
 
