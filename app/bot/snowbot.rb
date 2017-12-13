@@ -57,6 +57,7 @@ Bot.on :message do |message|
     else
       message.reply(
         text: "Sorry #{current_user.first_name}, I didnt understand the request"
+        )
     end
   end
 end
