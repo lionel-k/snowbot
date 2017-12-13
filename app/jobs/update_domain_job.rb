@@ -39,12 +39,14 @@ class UpdateDomainJob < ApplicationJob
     p domain.img_domain = element_pic.children[1].attributes['src'].value
 
     domain.save
-    # p "- - - - - - - - - - - - - - - - - - - - - - -"
-    # html_doc_weather.search('.weather')[1..7].each do |element|
-    #   condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
-    #   p domain.forecast_data = condition
-    #   p domain.forecast_data = condition == "sun"  ? true : false
-    #   domain.save
-    # end
+    p "- - - - - - - - - - - - - - - - - - - - - - -"
+    forecast = []
+    html_doc_weather.search('.weather')[1..4].each do |element|
+      condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
+      forecast << condition
+    end
+    domain.forecast_data = forecast.join("|")
+    domain.save
+    p domain.forecast_data
   end
 end

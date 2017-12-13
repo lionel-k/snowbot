@@ -27,14 +27,15 @@
       </div>
     </div>
     <div class='product-body'>
-      <h5><strong>Resort</strong></h5>
+      <% img_weather = @offer.domain.is_sunny? ? "sun.png" : "snow.png" %>
+      <h5><strong>Resort</strong> <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%></h5>
       <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
       <h6>Snow at the top: <strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
-      <h6><strong>
-        <% img_weather = @offer.domain.is_sunny? ? "sun.png" : "snow.png" %>
-          <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%>
-        </strong></h6>
-
+      <h6>Trend:
+        <% @forecast_data.split("|").each do |condition| %>
+          <%= image_tag "#{condition}.png", {class: "img-circle", size: "25x25" }%>
+        <% end %>
+      </h6>
     </div>
   </div>
 
