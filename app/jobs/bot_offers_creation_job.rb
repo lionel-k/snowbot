@@ -39,15 +39,15 @@ class BotOffersCreationJob < ApplicationJob
                   subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
                   default_action: {
                     type: "web_url",
-                    url: "#{ENV['HOST']}",
+                    url: "https://www.snowbot-ai.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "#{ENV['HOST']}"
+                    fallback_url: "https://www.snowbot-ai.com/"
                   },
                   buttons:[
                     {
                       type:"web_url",
-                      url:"#{ENV['HOST']}/offers/#{offer.id}",
+                      url:"https://www.snowbot-ai.com/offers/#{offer.id}",
                       title:"See more details"
                     }
                   ]

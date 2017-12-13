@@ -5,8 +5,7 @@ include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
   whitelisted_domains: [
-    "https://beb402a9.ngrok.io",
-    "https://www.snowbot-ai.com",
+    "https://www.snowbot-ai.com/",
     "https://odis.homeaway.com",
     "https://drivy.imgix.net",
     "https://img1.onthesnow.com",
