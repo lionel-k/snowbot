@@ -5,14 +5,14 @@ function loadDynamicBannerText() {
   if (bannerText) {
     new Typed('#banner-typed-text', {
       strings: [
-        "Winter is coming ...",
-        "Just for you ...",
-        "SnowBot",
-        "Finds the best ski resort",
-        "Tracks the ski resorts weather",
-        "Finds a confortable car",
-        "Finds a warmful apartment",
-        "Finds the right package!"],
+      "Winter is coming ...",
+      "Just for you ...",
+      "SnowBot",
+      "Tracks the weather",
+      "Finds the best ski resort",
+      "Finds a confortable car",
+      "Finds a warmful apartment",
+      "Finds the right package!"],
       typeSpeed: 200,
       loop: true
     });
