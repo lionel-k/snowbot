@@ -44,11 +44,21 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  font-size: 18px;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: lighter;
   opacity: 0.9;
+}
+
+.card-category-bot {
+  position: absolute;
+  left: 5px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: lighter;
+
 }
 
 .card-description {
@@ -57,16 +67,34 @@
   left: 10px;
 }
 
-.card-description h2 {
-  font-size: 20px;
+.card-description h5 {
+  font-size: 15px;
   margin-bottom: 0px;
   font-weight: bold;
   text-align: left;
 }
-.card-description p {
-  font-size: 14px;
+
+.card-description-bot {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+.card-description-bot h5 {
+  font-size: 15px;
+  margin-bottom: 0px;
+
+  text-align: left;
+}
+
+.card-description-bot p {
+  font-size: 10px;
   font-weight: lighter;
-  opacity: 0.9;
+}
+
+.card-description p {
+  font-size: 10px;
+  font-weight: lighter;
 }
 
 .card-avatar {

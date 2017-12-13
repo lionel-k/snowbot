@@ -2,11 +2,14 @@
   <p>Find me in app/views/pages/home.html.erb</p> -->
 
   <div class="banner" style="background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path "background.jpg" %>')">
+    <div class="container">
     <div class="banner-content">
       <h1>FIND YOUR SKI TRIP</h1>
-         <p><span id="banner-typed-text"></span></p>
+         <p>
+          <span id="banner-typed-text"></span>
+        </p>
           <div class="container-form-banner text-center">
-            <%= form_tag offers_path, method: :get, class: 'form-inline form-banner' do %>
+<!--             <%= form_tag offers_path, method: :get, class: 'form-inline form-banner' do %>
               <%= text_field_tag 'start_city', nil, class: "form-control text-center", placeholder: "Start Address", autofocus: true %>
               <%= select_tag 'mountain_chain', options_for_select(
               Domain.select(:mountain_chain).map(&:mountain_chain).uniq
@@ -17,13 +20,19 @@
               <%= date_field 'checkout', nil, class: "form-control datepicker text-center date-input", placeholder: "Checkout" %>
               <%= select_tag 'guests_number', options_for_select([['1'], ['2'], ['3'], ['4'], ['5']]), class: "form-control text-center unselected search-input", id: 'guest', prompt: "Guests" %>
               <%= submit_tag "Search", class: "btn btn-custom" %>
-            <% end %>
+            <% end %> -->
           </div>
+          <%= link_to image_tag('messenger-button.png', class: "btn-img btn-img-md"), "https://www.messenger.com/t/509778846073901" %>
     </div>
-  </div>
+    </div>
+
+
+
+</div>
 
   <div class="container">
     <h2 class="text-center">What a hell is SnowBot?</h2>
+
     <div class="row">
       <div class="video-responsive">
         <center><iframe width="420" height="315" src="https://www.youtube.com/embed/4_iLphoPTd8?rel=0" frameborder="0" allowfullscreen></iframe></center>

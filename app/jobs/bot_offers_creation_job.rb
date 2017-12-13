@@ -39,24 +39,17 @@ class BotOffersCreationJob < ApplicationJob
                   subtitle: offer.domain.mountain_chain + " | " + " Snow at top : " + offer.domain.snow_depth_high.to_s + "cm" + " | " + "Flat rating: " + offer.flat_ratings.round.to_s,
                   default_action: {
                     type: "web_url",
-                    url: "https://www.snowbot-ai.com",
+                    url: "https://www.snowbot-ai.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://www.snowbot-ai.com"
+                    fallback_url: "https://www.snowbot-ai.com/"
                   },
                   buttons:[
                     {
                       type:"web_url",
-                      url:"http://localhost:3000/offers/#{offer.id}",
+                      url:"https://www.snowbot-ai.com/offers/#{offer.id}",
                       title:"See more details"
                     }
-                      # ,
-                      # {
-                      #   type:"web_url",
-                      #   url: "https://859a9313.ngrok.io/orders/5/payments/new",
-                      #   title:"Book this trip !"
-                      #     # payload:"DEVELOPER_DEFINED_PAYLOAD"
-                      #   }
                   ]
                 }
               end
@@ -70,7 +63,7 @@ class BotOffersCreationJob < ApplicationJob
           id: message_sender_id
         },
         message: {
-          text: 'Sorry, we could not find any offers for your criteria :-( Would you like to go somewhere else?'
+          text: 'Sorry, we could not find any offers for your criteria :-( Would you like to make another search? Press the restart button!'
         }
       }, access_token: ENV['ACCESS_TOKEN'])
     end

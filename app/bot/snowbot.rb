@@ -5,9 +5,7 @@ include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
   whitelisted_domains: [
-    "https://fd044c33.ngrok.io",
-    # "http://localhost:3000/",
-    "https://www.snowbot-ai.com",
+    "https://www.snowbot-ai.com/",
     "https://odis.homeaway.com",
     "https://drivy.imgix.net",
     "https://img1.onthesnow.com",
@@ -99,16 +97,23 @@ end
 
 
 def ask_for_the_mountain_chain(postback)
-  postback.reply(
-    text: 'Indicate the mountain chain where you\'d like to go skiing! 🏔️',
-    quick_replies: Domain.select(:mountain_chain).distinct.order(:mountain_chain).map do |domain|
-      {
-        content_type: 'text',
-        title: "#{domain.mountain_chain.gsub("-"," ").upcase}",
-        payload: 'mountain_chain'
-      }
-    end
+  domains = Domain.select(:mountain_chain).distinct.order(:mountain_chain)
+  if domains.empty?
+    sleep(1)
+    postback.reply(
+      text: 'Sorry we currently have no offers available, the bot is in maintenance. Come back later!')
+  else
+    postback.reply(
+      text: 'Indicate the mountain chain where you\'d like to go skiing! 🏔️',
+      quick_replies: domains.map do |domain|
+        {
+          content_type: 'text',
+          title: "#{domain.mountain_chain.gsub("-"," ").upcase}",
+          payload: 'mountain_chain'
+        }
+      end
     )
+  end
 end
 
 
@@ -125,7 +130,7 @@ def handle_mountain_chain_input(message, current_user)
         payload: 'location'
       }
     ]
-    )
+  )
 end
 
 
@@ -144,7 +149,7 @@ def handle_checkin_input(message, current_user)
 
     message.reply(
       text: 'How many days are you planning to stay there?',
-      quick_replies: [3, 5, 7, 9].map do |day|
+      quick_replies: [3, 5, 7, 10].map do |day|
         {
           title: "#{day} days",
           content_type: "text",
@@ -176,8 +181,7 @@ def handle_checkout_input(message, current_user)
         payload: 'guests_number'
       }
     end
-
-    )
+  )
 end
 
 
@@ -195,7 +199,7 @@ def handle_location_input(message, current_user)
         payload: 'checkin'
       }
     end
-    )
+  )
 end
 
 
