@@ -3,20 +3,20 @@ require 'open-uri'
 
 include Facebook::Messenger
 
-Facebook::Messenger::Profile.set({
-  whitelisted_domains: [
-    "https://fd044c33.ngrok.io",
-    # "http://localhost:3000/",
-    "https://www.snowbot-ai.com",
-    "https://odis.homeaway.com",
-    "https://drivy.imgix.net",
-    "https://img1.onthesnow.com",
-    "https://img2.onthesnow.com",
-    "https://img3.onthesnow.com",
-    "https://img4.onthesnow.com",
-    "https://img5.onthesnow.com",
-    "https://img6.onthesnow.com"]
-    }, access_token: ENV['ACCESS_TOKEN'])
+# Facebook::Messenger::Profile.set({
+#   whitelisted_domains: [
+#     "https://b30e7c8e.ngrok.io",
+#     # "http://localhost:3000/",
+#     "https://www.snowbot-ai.com",
+#     "https://odis.homeaway.com",
+#     "https://drivy.imgix.net",
+#     "https://img1.onthesnow.com",
+#     "https://img2.onthesnow.com",
+#     "https://img3.onthesnow.com",
+#     "https://img4.onthesnow.com",
+#     "https://img5.onthesnow.com",
+#     "https://img6.onthesnow.com"]
+#     }, access_token: ENV['ACCESS_TOKEN'])
 
 Bot.on :postback do |postback|
   puts "-- postback"
