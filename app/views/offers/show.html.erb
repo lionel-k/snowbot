@@ -66,17 +66,10 @@
   </div>
 
   <center>
-    <%= simple_form_for(@order)  do |f| %>
-    <%= f.input :car_price, :as => :hidden, :input_html => { :value => @offer.car_price } %>
-    <%= f.input :car_photo, :as => :hidden, :input_html => { :value => @offer.car_photo } %>
-    <%= f.input :flat_price, :as => :hidden, :input_html => { :value => @offer.flat_price_by_night } %>
-    <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => @offer.flat_photo } %>
-    <%= f.input :offer_price, :as => :hidden, :input_html => { :value => @offer.total_price(@diff_days) } %>
-    <%= f.input :domain, :as => :hidden, :input_html => { :value => @offer.domain.id } %>
-    <%= f.button :submit, "Book your trip", class: "btn-custom" %>
+    <%= simple_form_for([@offer, @order])  do |f| %>
+      <%= f.button :submit, "Book your trip", class: "btn-custom" %>
     <% end %>
   </center>
-
 
 </div>
 

@@ -12,8 +12,8 @@
 
   <hr>
 
-  <% @offers.each do |offer| %>
-  <h2>Top Offer <%= offer.id + 1%></h2>
+  <% @offers.each_with_index do |offer, index| %>
+  <h2>Top Offer <%= index + 1%></h2>
 
 
 
@@ -22,9 +22,9 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+          <div class="card-body center-cropped" style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path offer.domain.img_domain %>);">
 
-            <%= image_tag offer.domain.img_domain, :class => "center-cropped" %>
+
             <div class="card-category"><h2>Resort</h2></div>
             <div class="card-description">
               <h2><%= offer.domain.name %></h2>
@@ -44,14 +44,16 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-            <%= image_tag offer.flat_photo, :class => "center-cropped" %>
+          <div class="card-body center-cropped" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path offer.flat_photo %>);">
             <div class="card-category"><h2>Housing</h2></div>
             <div class="card-description">
+              <h2><%= offer.flat_bedrooms_nb %> bedrooms</h2>
             </div>
           </div>
           <div class="card-footer">
-            <h5 class="card-offer-details"><%= offer.flat_title %></h5>
+            <h5 class="card-offer-details"><%= offer.flat_title %>
+              <p>Flat rating: <%= offer.flat_ratings %></p>
+            </h5>
             <h5 class="card-offer-price"><strong><%= offer.flat_price_by_night %>€/night</strong></h5>
           </div>
         </div>
@@ -59,8 +61,7 @@
 
       <div class="col-xs-12 col-sm-4">
         <div class="card">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-            <%= image_tag offer.car_photo, :class => "center-cropped", :align=> "middle"%>
+          <div class="card-body center-cropped" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path offer.car_photo, :align=> "middle"%>);">
             <div class="card-category"><h2>Car</h2></div>
             <div class="card-description">
             </div>
@@ -83,16 +84,8 @@
   </div>
   <br />
   <center>
-    <%= simple_form_for(@order)  do |f| %>
-    <%= f.input :car_price, :as => :hidden, :input_html => { :value => offer.car_price } %>
-    <%= f.input :car_photo, :as => :hidden, :input_html => { :value => offer.car_photo } %>
-    <%= f.input :flat_price, :as => :hidden, :input_html => { :value => offer.flat_price_by_night } %>
-    <%= f.input :flat_photo, :as => :hidden, :input_html => { :value => offer.flat_photo } %>
-    <%= f.input :offer_price, :as => :hidden, :input_html => { :value => offer.total_price(@diff_days) } %>
-    <%= f.input :domain, :as => :hidden, :input_html => { :value => offer.domain.id } %>
-    <%= f.button :submit, "Book your trip", class: "btn-custom" %>
+    <%= link_to "See details", offer_path(offer), class: "btn-custom" %>
     <br><br />
-    <% end %>
   </center>
   <% end %>
   <br><br />

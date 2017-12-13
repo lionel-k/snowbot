@@ -27,8 +27,7 @@
     </div>
     <% else %>
     <!-- Login link (when logged out) -->
-    <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <%= link_to t(".sign_in", default: "Signup"), new_user_registration_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <%= link_to t(".sign_in", default: "Sign in with Facebook"), user_facebook_omniauth_authorize_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
   <!-- Dropdown list appearing on mobile only -->
@@ -38,7 +37,7 @@
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <% if user_signed_in? %>
         <li>
-          <%= link_to "My Orders", orders_path, class: "navbar-wagon-item navbar-wagon-link" %>
+          <%= link_to "My Trips", orders_path, class: "navbar-wagon-item navbar-wagon-link" %>
         </li>
         <li>
           <%= link_to destroy_user_session_path, method: :delete do %>
@@ -47,8 +46,7 @@
         </li>
         <% else %>
         <!-- Login link (when logged out) -->
-        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-        <%= link_to t(".sign_in", default: "Signup"), new_user_registration_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to t(".sign_in", default: "Signin with Facebook"), user_facebook_omniauth_authorize_path, class: "navbar-wagon-item navbar-wagon-link" %>
         <% end %>
       </ul>
     </div>

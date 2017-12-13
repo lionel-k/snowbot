@@ -39,15 +39,14 @@ class FetchDrivySearch
     listings_serialized = open(url_drivy).read
     listings = JSON.parse(listings_serialized)
     available_cars = listings['cars']
-    min_total_price = (@attributes[:checkout].to_date - @attributes[:checkin].to_date + 1) * 40
-    cars_selection = available_cars.sort_by { |k| k['humanPrice'].delete('€').to_i }.
-      sort_by { |k| k['humanPrice'].delete('€').to_i }.
+    min_total_price = (@attributes[:checkout].to_date - @attributes[:checkin].to_date + 1).to_i * 40
+    cars_selection = available_cars.select { |k| k['humanPrice'].delete('€').delete(" ").to_i > min_total_price }.
+      sort_by { |k| k['humanPrice'].delete('€').delete(" ").to_i }.
       first(@attributes[:nb_cars])
-
-    c = cars_selection.map do |car|
+    cars_selection.map do |car|
       Car.new(
         id_drivy: car['id'],
-        price: car['humanPrice'].delete('€').to_i,
+        price: car['humanPrice'].delete('€').delete(" ").to_i,
         title: car['carTitle'],
         photo: car['carThumbUrl']
       )
