@@ -57,6 +57,18 @@ Bot.on :message do |message|
     else
       message.reply(
         text: "Sorry #{current_user.first_name}, I didnt understand the request",
+        buttons: [
+              {
+                type: "postback",
+                title: "Yes!",
+                payload: "yes",
+              },
+              {
+                type: "postback",
+                title: "No!",
+                payload: "no",
+              }
+          ]
         )
     end
   end
@@ -84,10 +96,16 @@ def greet_current_user(postback)
   current_user.save
 
   postback.reply(
-    text: "Hello #{first_name} :) I am SnowBot 🤖 the ski specialist ! Ready to book your next ski trip? 🏂",
+    text: "Hello #{first_name} I am SnowBot 🤖 the ski specialist ! Ready to book your next trip? 🏂"
   )
   postback.reply(
-    text: "For you 🔎 I will find a snowy resort ⛄, a car of phew 🚘 and a warm cottage 🏠. My bias => select the best low budget offer 💵",
+    attachment:{
+      type:"image",
+      payload:{
+        url:"https://media.giphy.com/media/3oxHQiF8d5gF1DqG2s/giphy.gif",
+        is_reusable:true
+      }
+    }
   )
 end
 
@@ -137,7 +155,7 @@ def handle_checkin_input(message, current_user)
     current_user.save
 
     message.reply(
-      text: 'How many days are you planning to stay there? 📅',
+      text: 'How many days are you planning to stay there?',
       quick_replies: [3, 5, 7, 9].map do |day|
         {
           title: "#{day} days",
@@ -162,8 +180,8 @@ def handle_checkout_input(message, current_user)
   current_user.save
 
   message.reply(
-    text: 'How many of you are going 🎅?',
-    quick_replies: [2, 3, 4].map do |number|
+    text: 'How many of you are going ?',
+    quick_replies: [2, 3, 4, 5].map do |number|
       {
         title: "#{number}",
         content_type: "text",
@@ -181,7 +199,7 @@ def handle_location_input(message, current_user)
   current_user.save
 
   message.reply(
-    text: 'When do you want to leave 🚀?',
+    text: 'When do you want to leave ?',
     quick_replies: ['Tomorrow', 'In 2 days', 'In 3 days'].map do |duration|
       {
         title: "#{duration}",
@@ -202,24 +220,20 @@ end
 
 def search_offers(message, current_user)
   message.reply(
-    text: "OK ! Our algorithm looks for the best possible combination 3 .. 2 .. 1 .. 🔥"
-  )
-
-  message.reply(
-    text: " with our partners DRIVY 🚗 and HOMELIDAYS 🛏️"
+    text: "#{current_user.first_name}, we are searching the best offers for you ... 🔥"
   )
   message.reply(
     attachment:{
       type:"image",
       payload:{
-        url:"https://media.giphy.com/media/fXgKfzV4aaHQI/giphy.gif",
+        url:"https://media.giphy.com/media/3o6fJ4yWX1z0ghY316/giphy.gif",
         is_reusable:true
       }
     }
   )
   message.typing_on
   message.reply(
-    text: "#{current_user.first_name}, Here are the three best options available to you: )"
+    text: "Here are the best options available to you :)"
   )
   BotOffersCreationJob.perform_later(current_user.id)
 end
