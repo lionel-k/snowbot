@@ -1,7 +1,7 @@
 .product {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   border-radius: 3px;
   transition: all 0.15s ease;
 }
@@ -17,7 +17,7 @@
 }
 .product-body p {
   font-weight: lighter;
-  color: #999999;
+  color: black;
   margin-bottom: 0;
 }
 
@@ -26,7 +26,7 @@
   margin-right: 10px;
   width: 100%;
   max-width: 150px;
-  height: 150px;
+  height: 130px;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
