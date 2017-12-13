@@ -27,6 +27,17 @@ class BotOffersCreationJob < ApplicationJob
           id: message_sender_id
         },
         message: {
+          text: 'Here are the best options we have found for you 😀'
+        }
+      }, access_token: ENV['ACCESS_TOKEN'])
+
+      sleep(1)
+
+      Bot.deliver({
+        recipient: {
+          id: message_sender_id
+        },
+        message: {
           attachment: {
             type:"template",
             payload: {

@@ -218,15 +218,13 @@ def search_offers(message, current_user)
     attachment:{
       type:"image",
       payload:{
-        url:"https://media.giphy.com/media/3o6fJ4yWX1z0ghY316/giphy.gif",
+        url:"https://media.giphy.com/media/xT1R9KkwhNKqWhoCo8/giphy.gif",
         is_reusable:true
       }
     }
   )
   message.typing_on
-  message.reply(
-    text: "Here are the best options available to you :)"
-  )
+
   BotOffersCreationJob.perform_later(current_user.id)
 end
 
