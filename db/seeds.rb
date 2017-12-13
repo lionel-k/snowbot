@@ -64,8 +64,8 @@ le_ballon_dalsace = Domain.create(name: "Le Ballon d'Alsace", location: "5 Gr Gr
 gerardmer = Domain.create(name: "Gérardmer", location: "239 Chemin de la Rayée, 88400 Gérardmer", name_url: "gerardmer", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 la_bresse_hohneck = Domain.create(name: "La Bresse Hohneck", location: "88 Route de Vologne, 88250 La Bresse", name_url: "la-bresse-hohneck", mountain_chain: "vosges", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
-metabief_mont_dor = Domain.create(name: "Métabief Mont d'Or", location: "16 Rue du Village, 25370 Métabief", name_url: "metabief-mont-dor", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
-les_rousses = Domain.create(name: "Les Rousses", location: "234 Rue Pasteur, 39220 Les Rousses", name_url: "les-rousses", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
-monts_jura = Domain.create(name: "Monts Jura", location: "435 rue des Monts Jura, 01410 Lélex", name_url: "monts-jura", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
+# metabief_mont_dor = Domain.create(name: "Métabief Mont d'Or", location: "16 Rue du Village, 25370 Métabief", name_url: "metabief-mont-dor", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
+# les_rousses = Domain.create(name: "Les Rousses", location: "234 Rue Pasteur, 39220 Les Rousses", name_url: "les-rousses", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
+# monts_jura = Domain.create(name: "Monts Jura", location: "435 rue des Monts Jura, 01410 Lélex", name_url: "monts-jura", mountain_chain: "jura", is_sunny: nil, forecast_data: nil, snow_depth_low: nil, snow_depth_high: nil)
 
 puts "Seeds finished"
