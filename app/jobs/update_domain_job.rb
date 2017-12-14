@@ -41,7 +41,7 @@ class UpdateDomainJob < ApplicationJob
     domain.save
     p "- - - - - - - - - - - - - - - - - - - - - - -"
     forecast = []
-    html_doc_weather.search('.weather')[1..4].each do |element|
+    html_doc_weather.search('.weather')[1..3].each do |element|
       condition = element.children[1].attributes['class'].value.split(' ').drop(1)[0]
       forecast << condition
     end

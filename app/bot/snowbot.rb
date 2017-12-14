@@ -89,7 +89,8 @@ def greet_current_user(postback)
     attachment:{
       type:"image",
       payload:{
-        url:"https://media.giphy.com/media/3oxHQiF8d5gF1DqG2s/giphy.gif",
+        # url:"https://media.giphy.com/media/3oxHQiF8d5gF1DqG2s/giphy.gif",
+        url:"https://www.snowbot-ai.com/loader-welcome.gif",
         is_reusable:true
       }
     }
@@ -211,7 +212,6 @@ def handle_guests_number_input(message, current_user)
   current_user.save
 end
 
-
 def search_offers(message, current_user)
   message.reply(
     text: "#{current_user.first_name}, we are searching the best offers for you ... 🔥"
@@ -220,7 +220,8 @@ def search_offers(message, current_user)
     attachment:{
       type:"image",
       payload:{
-        url:"https://media.giphy.com/media/xT1R9KkwhNKqWhoCo8/giphy.gif",
+        # url:"https://media.giphy.com/media/xT1R9KkwhNKqWhoCo8/giphy.gif",
+        url:"https://www.snowbot-ai.com/loader-search.gif",
         is_reusable:true
       }
     }
