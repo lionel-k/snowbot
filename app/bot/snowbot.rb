@@ -24,6 +24,59 @@ Bot.on :postback do |postback|
   if postback.payload == 'get_started'
     greet_current_user(postback)
     ask_for_the_mountain_chain(postback)
+  elsif postback.payload == 'share_snowbot'
+      postback.reply(
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                title: "Find your ski trip ⛷️",
+                image_url: "https://www.snowbot-ai.com/assets/background-2cad98033199b80703f0d4c7e9e975559d7c28c9d60aa853bf6a0883c4a42005.jpg",
+                subtitle: "Winter is coming ... let's use our ski trip organizer !",
+                # default_action: {
+                #   type: "web_url",
+                #   url: "https://www.snowbot-ai.com",
+                #   messenger_extensions: "true",
+                #   webview_height_ratio: "compact" # full / tall
+                # },
+                buttons:[
+                  {
+                    type: "element_share",
+                    share_contents: {
+                      attachment: {
+                        type: "template",
+                        payload: {
+                          template_type: "generic",
+                          elements: [
+                            {
+                              title: "💬 Let's connect to SnowBot",
+                              image_url: "https://media.giphy.com/media/KT2wdPEnRoGxG/giphy.gif",
+                              subtitle: "SnowBot finds you the best ski packages",
+                              default_action: {
+                                type: "web_url",
+                                url: "https://www.snowbot-ai.com"
+                              },
+                              buttons:[
+                                {
+                                  type: "web_url",
+                                  url: "https://www.snowbot-ai.com",
+                                  title: "Start the chat with out bot 🎄"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+    )
   end
 end
 
