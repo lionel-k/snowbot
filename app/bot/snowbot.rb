@@ -33,7 +33,7 @@ Bot.on :postback do |postback|
             elements: [
               {
                 title: "Find your ski trip ⛷️",
-                image_url: "https://www.snowbot-ai.com/assets/background-2cad98033199b80703f0d4c7e9e975559d7c28c9d60aa853bf6a0883c4a42005.jpg",
+                image_url: "https://media.cntraveler.com/photos/5894ab2a6ec1a4c97510c2f7/master/w_1024,c_limit/ski-vermont-stowe-cr-courtesy.jpg",
                 subtitle: "Winter is coming ... let's use our ski trip organizer !",
                 # default_action: {
                 #   type: "web_url",
@@ -52,7 +52,7 @@ Bot.on :postback do |postback|
                           elements: [
                             {
                               title: "💬 Let's connect to SnowBot",
-                              image_url: "https://media.giphy.com/media/KT2wdPEnRoGxG/giphy.gif",
+                              image_url: "https://www.snowbot-ai.com/assets/logo-24374e77417b9092325df801aa3c4ea540b702bec3b1853be95d340f330a23af.png",
                               subtitle: "SnowBot finds you the best ski packages",
                               default_action: {
                                 type: "web_url",
@@ -61,7 +61,7 @@ Bot.on :postback do |postback|
                               buttons:[
                                 {
                                   type: "web_url",
-                                  url: "https://www.snowbot-ai.com",
+                                  url: "https://www.messenger.com/t/509778846073901",
                                   title: "Start the chat with out bot 🎄"
                                 }
                               ]
