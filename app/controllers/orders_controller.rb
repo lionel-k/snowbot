@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
     @order = Order.new(
       user: current_user,
       domain: @offer.domain,
+      offer: @offer,
       drivy_data: { price: car_price, photo: car_photo },
       homeaway_data: { price: flat_price, photo: flat_photo },
       amount: offer_price,
