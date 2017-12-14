@@ -1,59 +1,85 @@
 <div class="container">
 
-  <h1>Your Trips</h1>
   <hr>
-  <h4 class="text-center"><%= "#{current_user.first_name}" unless current_user.first_name.nil? %></h4>
+  <h6>Here are the details of your trip: </h6>
+  <h6>Leaving on <strong><%= @checkin.strftime("%A, %b %d") %></strong></h6>
+  <h6>Returning on <strong><%= @checkout.strftime("%A, %b %d") %></strong></h6>
+  <h6>With <strong><%= @guests_number %> persons</strong></h6>
+  <h6>Total Price: <strong><%= humanized_money(@order.amount) %>€</strong></h6>
+  <hr>
 
-  <% current_user.orders.each do |order| %>
-    <div class="row separator">
+  <%# current_user.orders.each do |order| %>
+  <div class="row separator">
 
-      <div class="col-xs-12 col-sm-4">
-        <div class="card-order">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-            <%= image_tag order.homeaway_data["photo"], :class => "center-cropped" %>
-            <div class="card-category"><h2>Housing</h2></div>
-            <div class="card-description">
-            </div>
-          </div>
-          <div class="card-footer" style="background-image: url('<%= image_path "logo_homeaway.png" %>');">
-            <div class="card-links">
-              <h5></h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-4">
-        <div class="card-order">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
-            <%= image_tag order.drivy_data["photo"], :class => "center-cropped", :align=> "middle"%>
-            <div class="card-category"><h2>Car</h2></div>
-            <div class="card-description">
-            </div>
-          </div>
-          <div class="card-footer" style="background-image: url('<%= image_path "logo_drivy.png" %>');">
-            <div class="card-links">
-              <h5></h5>
-            </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="card-order">
+        <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.domain.img_domain %>);">
+          <% img_weather = @offer.domain.is_sunny? ? "sun.png" : "snow.png" %>
+          <div class="card-category"><h2>Resort <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%></h2></div>
+          <div class="card-description">
+            <h2><%= @order.domain.name %></h2>
+            <h4><%= @offer.domain.mountain_chain.gsub("-", " ").titleize %></h4>
           </div>
         </div>
-      </div>
+        <div class="card-footer">
+          <div class="card-links">
+            <h5>Trend:
+              <% @forecast_data.split("|").each do |condition| %>
+              <%= image_tag "#{condition}.png", {class: "img-circle", size: "25x25" }%>
+              <% end %>
+            </h5>
+            <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
+            <h6>Snow at the top: <strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
 
-      <div class="col-xs-12 col-sm-4">
-        <div class="card-order">
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "snowbot.png" %>');">
-            <div class="card-category"><h2>Status: <%= order.status %></h2></div>
-            <div class="card-description">
-            </div>
           </div>
-          <div class="card-footer-order">
 
-              <h5>Amount: <%= humanized_money_with_symbol(order.amount) %></h5>
+        </div>
+      </div>
+    </div>
 
-
+    <div class="col-xs-12 col-sm-4">
+      <div class="card-order">
+        <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+          <%= image_tag @order.homeaway_data["photo"], :class => "center-cropped" %>
+          <div class="card-category"><h2>Housing</h2></div>
+          <div class="card-description">
+            <h4>Bedrooms:
+              <% @offer.flat_bedrooms_nb.times do %>
+              <i class="fa fa-bed" aria-hidden="true"></i>
+              <% end %>
+            </h4>
+            <h5>Ratings:
+              <% @offer.flat_ratings.to_i.times do %>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <% end %>
+            </h5>
+          </div>
+        </div>
+        <div class="card-footer" style="background-image: url('<%= image_path "logo_homeaway.png" %>');">
+          <div class="card-links">
+            <h5></h5>
           </div>
         </div>
       </div>
     </div>
-  <% end %>
+
+    <div class="col-xs-12 col-sm-4">
+      <div class="card-order">
+        <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+          <%= image_tag @order.drivy_data["photo"], :class => "center-cropped", :align=> "middle"%>
+          <div class="card-category"><h2>Car</h2></div>
+          <div class="card-description">
+            <h2><%= @offer.car_title %></h2>
+          </div>
+        </div>
+        <div class="card-footer" style="background-image: url('<%= image_path "logo_drivy.png" %>');">
+          <div class="card-links">
+            <h5></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <%# end %>
 </div>
