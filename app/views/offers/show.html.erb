@@ -29,8 +29,13 @@
     <div class='product-body'>
       <% img_weather = @offer.domain.is_sunny? ? "sun.png" : "snow.png" %>
       <h5><strong>Resort</strong> <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%></h5>
-      <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
+<!--       <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
       <h6>Snow at the top: <strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
+ -->      <div class="snow-resort-level">
+        <h6 class="snow-resort-cm">Snow at top / at resort</h6>
+        <h6 class="snow-resort-top"><strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
+        <h6 class="snow-resort-bottom"><strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
+      </div>
       <h6>Trend:
         <% @forecast_data.split("|").each do |condition| %>
         <%= image_tag "#{condition}.png", {class: "img-circle", size: "25x25" }%>

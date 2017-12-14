@@ -35,6 +35,33 @@
   object-fit: cover;
 }
 
+.snow-resort-level {
+  position: relative;
+  height: 45px;
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+.snow-resort-cm {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  max-width: 90px;
+  line-height: 20px;
+}
+
+.snow-resort-top {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.snow-resort-bottom {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
 /* Upvote design */
 .product-upvote {
   padding-right: 20px;
