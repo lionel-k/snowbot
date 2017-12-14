@@ -5,6 +5,7 @@ include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
   whitelisted_domains: [
+    "https://3963afa2.ngrok.io",
     "https://www.snowbot-ai.com/",
     "https://odis.homeaway.com",
     "https://drivy.imgix.net",
@@ -84,7 +85,6 @@ def greet_current_user(postback)
   postback.reply(
     text: "Hello #{first_name} I am SnowBot 🤖 the ski specialist ! Ready to book your next trip? 🏂"
   )
-  sleep(0.5)
   postback.reply(
     attachment:{
       type:"image",
