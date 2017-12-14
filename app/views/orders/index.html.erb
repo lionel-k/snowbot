@@ -18,7 +18,7 @@
           <div class="card-category"><h2>Resort <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%></h2></div>
           <div class="card-description">
             <h2><%= @order.domain.name %></h2>
-            <p><%= @offer.domain.mountain_chain.gsub("-", " ").titleize %></p>
+            <h4><%= @offer.domain.mountain_chain.gsub("-", " ").titleize %></h4>
           </div>
         </div>
         <div class="card-footer">
@@ -43,6 +43,16 @@
           <%= image_tag @order.homeaway_data["photo"], :class => "center-cropped" %>
           <div class="card-category"><h2>Housing</h2></div>
           <div class="card-description">
+            <h4>Bedrooms:
+              <% @offer.flat_bedrooms_nb.times do %>
+              <i class="fa fa-bed" aria-hidden="true"></i>
+              <% end %>
+            </h4>
+            <h5>Ratings:
+              <% @offer.flat_ratings.to_i.times do %>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <% end %>
+            </h5>
           </div>
         </div>
         <div class="card-footer" style="background-image: url('<%= image_path "logo_homeaway.png" %>');">
@@ -59,6 +69,7 @@
           <%= image_tag @order.drivy_data["photo"], :class => "center-cropped", :align=> "middle"%>
           <div class="card-category"><h2>Car</h2></div>
           <div class="card-description">
+            <h2><%= @offer.car_title %></h2>
           </div>
         </div>
         <div class="card-footer" style="background-image: url('<%= image_path "logo_drivy.png" %>');">
