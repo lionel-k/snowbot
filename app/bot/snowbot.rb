@@ -212,7 +212,6 @@ def handle_guests_number_input(message, current_user)
   current_user.save
 end
 
-
 def search_offers(message, current_user)
   message.reply(
     text: "#{current_user.first_name}, we are searching the best offers for you ... 🔥"
