@@ -21,6 +21,18 @@
   margin-bottom: 0;
 }
 
+.product-body-username {
+  padding: 0 10px 0 10px;
+}
+
+.product-body-username h4 {
+  margin: 25px 0 10px 0 !important;
+}
+
+.product-body-username h6 {
+  margin: 0 0 3px 0 !important;
+}
+
 /* Product image */
 .product-image {
   margin-right: 10px;
@@ -33,6 +45,33 @@
   border-radius: 10px !important;
   // overflow: hidden;
   object-fit: cover;
+}
+
+.snow-resort-level {
+  position: relative;
+  height: 45px;
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+.snow-resort-cm {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  max-width: 90px;
+  line-height: 20px;
+}
+
+.snow-resort-top {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.snow-resort-bottom {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 
 /* Upvote design */

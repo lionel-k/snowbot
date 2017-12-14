@@ -1,20 +1,18 @@
 <div class="container">
 
   <div class="product">
-    <div class='product-body'>
-      <h4><center><%= @offer.user.first_name %>,<center/></h4>
-        <h6>Here are the details of the offer:</h6>
-        <h6>
-          <span>From <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
-          to
-          <span><strong><%= @checkout.strftime("%A, %b %d") %></strong></span>
-          <span>
-            (<%= "#{@diff_days}"%> <%= 'night'.pluralize(@diff_days) %>)
-          </span>
-          <span>
-           | For <strong><%= @guests_number %> persons</strong>
-         </span>
-       </h6>
+    <div class='product-body product-body-username'>
+      <h4><%= @offer.user.first_name %>,</h4>
+      <h6>
+        <span>Ready to go </span>
+        <span>from <strong><%= @checkin.strftime("%A, %b %d") %></strong></span>
+        to
+        <span><strong><%= @checkout.strftime("%A, %b %d") %> ?  </strong></span>
+        <span>
+          (<%= "#{@diff_days}"%> <%= 'night'.pluralize(@diff_days) %>,
+        </span>
+        <span><%= @guests_number %> guests)</span>
+     </h6>
      </div>
    </div>
 
@@ -29,8 +27,13 @@
     <div class='product-body'>
       <% img_weather = @offer.domain.is_sunny? ? "sun.png" : "snow.png" %>
       <h5><strong>Resort</strong> <%= image_tag img_weather, {class: "img-circle", size: "25x25" }%></h5>
-      <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
+<!--       <h6>Snow at resort: <strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
       <h6>Snow at the top: <strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
+ -->      <div class="snow-resort-level">
+        <h6 class="snow-resort-cm">Snow at top / at resort</h6>
+        <h6 class="snow-resort-top"><strong><%= @offer.domain.snow_depth_high %> cm</strong></h6>
+        <h6 class="snow-resort-bottom"><strong><%= @offer.domain.snow_depth_low %> cm</strong></h6>
+      </div>
       <h6>Trend:
         <% @forecast_data.split("|").each do |condition| %>
         <%= image_tag "#{condition}.png", {class: "img-circle", size: "25x25" }%>

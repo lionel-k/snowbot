@@ -1,12 +1,27 @@
 <div class="container">
 
-  <hr>
-  <h6>Here are the details of your trip: </h6>
-  <h6>Leaving on <strong><%= @checkin.strftime("%A, %b %d") %></strong></h6>
-  <h6>Returning on <strong><%= @checkout.strftime("%A, %b %d") %></strong></h6>
-  <h6>With <strong><%= @guests_number %> persons</strong></h6>
-  <h6>Total Price: <strong><%= humanized_money(@order.amount) %>€</strong></h6>
-  <hr>
+  <div class="order-recap">
+    <h4><%= @offer.user.first_name %>,</h4>
+    <h6>Here are the details of your trip: </h6>
+    <div class="order-recap-details">
+      <div class="order-recap-item">
+        <h6>Checkin:</h6>
+        <h6><strong><%= @checkin.strftime("%A, %b %d") %></strong></h6>
+      </div>
+      <div class="order-recap-item">
+        <h6>Checkout:</h6>
+        <h6><strong><%= @checkout.strftime("%A, %b %d") %></strong></h6>
+      </div>
+      <div class="order-recap-item">
+        <h6>Guests number:</h6>
+        <h6><strong><%= @guests_number %> persons</strong></h6>
+      </div>
+      <div class="order-recap-item">
+        <h6>Total Price:</h6>
+        <h6><strong><%= humanized_money(@order.amount) %>€</strong></h6>
+      </div>
+    </div>
+  </div>
 
   <%# current_user.orders.each do |order| %>
   <div class="row separator">
