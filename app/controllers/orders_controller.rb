@@ -5,6 +5,13 @@ class OrdersController < ApplicationController
   before_action :custom_authenticate_user!, only: :create
 
   def index
+    @order = current_user.orders.last
+    @offer = @order.offer
+    @checkin = Date.parse(@order.checkin)
+    @checkout = Date.parse(@order.checkout)
+    @guests_number = @order.guests_number
+    @diff_days = @checkout.mjd - @checkin.mjd
+    @forecast_data = @offer.domain.forecast_data
   end
 
   def create
@@ -21,6 +28,10 @@ class OrdersController < ApplicationController
     @order = Order.new(
       user: current_user,
       domain: @offer.domain,
+      offer: @offer,
+      checkin: @offer.user.query["checkin"],
+      checkout: @offer.user.query["checkout"],
+      guests_number: @offer.user.query["guests_number"].to_i,
       drivy_data: { price: car_price, photo: car_photo },
       homeaway_data: { price: flat_price, photo: flat_photo },
       amount: offer_price,

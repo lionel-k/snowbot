@@ -23,7 +23,7 @@
       <div class="card-category-bot"></div>
       <div class="card-description-bot">
         <h5><%= @offer.domain.name %></h5>
-        <p><%= @offer.domain.mountain_chain.gsub("-", " ").titleize { |match|  } %></p>
+        <p><%= @offer.domain.mountain_chain.gsub("-", " ").titleize %></p>
       </div>
     </div>
     <div class='product-body'>
@@ -43,7 +43,7 @@
     <div class="card-body product-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path @offer.flat_photo %>);">
       <div class="card-category-bot"></div>
       <div class="card-description-bot"><h5><%= "#{@offer.flat_bedrooms_nb }" " bedroom".pluralize(@offer.flat_bedrooms_nb) %></h5>
-        <p>Flat Rating: <%= @offer.flat_ratings %></p>
+        <p>Flat Rating: <%= "%0.1f" % @offer.flat_ratings %></p>
       </div>
     </div>
     <div class='product-body'>
