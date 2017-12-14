@@ -32,9 +32,9 @@ Bot.on :postback do |postback|
             template_type: "generic",
             elements: [
               {
-                title: "Find your ski trip ⛷️",
-                image_url: "https://media.cntraveler.com/photos/5894ab2a6ec1a4c97510c2f7/master/w_1024,c_limit/ski-vermont-stowe-cr-courtesy.jpg",
-                subtitle: "Winter is coming ... let's use our ski trip organizer !",
+                title: "Meet Snowbot 🤖",
+                image_url: "https://www.snowbot-ai.com/facebook_share.jpg",
+                subtitle: "... and book your ski trip in the most snowy ski resorts 😀",
                 # default_action: {
                 #   type: "web_url",
                 #   url: "https://www.snowbot-ai.com",
@@ -51,9 +51,9 @@ Bot.on :postback do |postback|
                           template_type: "generic",
                           elements: [
                             {
-                              title: "💬 Let's connect to SnowBot",
-                              image_url: "https://www.snowbot-ai.com/assets/logo-24374e77417b9092325df801aa3c4ea540b702bec3b1853be95d340f330a23af.png",
-                              subtitle: "SnowBot finds you the best ski packages",
+                              title: "Meet Snowbot 🤖",
+                              image_url: "https://www.snowbot-ai.com/facebook_share.jpg",
+                              subtitle: "... and book your ski trip in the most snowy ski resorts 😀",
                               default_action: {
                                 type: "web_url",
                                 url: "https://www.snowbot-ai.com"
@@ -62,7 +62,7 @@ Bot.on :postback do |postback|
                                 {
                                   type: "web_url",
                                   url: "https://www.messenger.com/t/509778846073901",
-                                  title: "Start the chat with out bot 🎄"
+                                  title: "Start chatting with Snowbot now 🤖"
                                 }
                               ]
                             }
