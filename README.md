@@ -1,2 +1,3 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
-# snowbot-plus
+# SnowBot
+
+A bot allow users to instantaneously see product packs from various platforms to go on ski trip without spending ages in search & compare mission.
