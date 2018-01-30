@@ -5,7 +5,7 @@ include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
   whitelisted_domains: [
-    "https://www.snowbot-ai.com",
+    "https://snowbots-app.herokuapp.com",
     "https://odis.homeaway.com",
     "https://drivy.imgix.net",
     "https://img1.onthesnow.com",
@@ -55,7 +55,7 @@ Bot.on :postback do |postback|
                               subtitle: "... and book your ski trip in the most snowy ski resorts 😀",
                               default_action: {
                                 type: "web_url",
-                                url: "https://www.snowbot-ai.com"
+                                url: "https://snowbots-app.herokuapp.com"
                               },
                               buttons:[
                                 {
