@@ -4,14 +4,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, #:registerable,
   # :recoverable,
-  :rememberable, :trackable, :validatable
-
-  devise :omniauthable, omniauth_providers: [:facebook]
+  :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
   has_many :orders
   has_many :offers
 
-  def self.find_for_facebook_oauth(auth, offer=nil)
+  def self.find_for_facebook_oauth(auth)
     user_params = auth.slice(:provider, :uid)
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
     user_params[:facebook_picture_url] = auth.info.image
@@ -30,14 +28,14 @@ class User < ApplicationRecord
       user.save
     end
 
-    # reconcicialiton user entre FB login (provider + uid) et FB messenger (psid + query)
-    if offer && offer.user != user
-      fake_offer_user = offer.user
+    # # reconcicialiton user entre FB login (provider + uid) et FB messenger (psid + query)
+    # if offer && offer.user != user
+    #   fake_offer_user = offer.user
 
-      user.update(psid: fake_offer_user.psid, query: fake_offer_user.query)
-      fake_offer_user.offers.update(user_id: user.id)
-      fake_offer_user.destroy
-    end
+    #   user.update(psid: fake_offer_user.psid, query: fake_offer_user.query)
+    #   fake_offer_user.offers.update(user_id: user.id)
+    #   fake_offer_user.destroy
+    # end
 
     return user
   end
