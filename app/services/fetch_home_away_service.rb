@@ -53,7 +53,7 @@ class FetchHomeAwayService
       location: flat['location']['city'],
       price_by_night: flat['priceQuote']['averageNightly'].to_f.ceil,
       ratings: flat['reviewAverage'],
-      photo: flat['thumbnail']['uri'],
+      photo: image_tag('flat-les-arcs.jpg'),
       title: flat['headline'],
       bedrooms_nb: flat['bedrooms']
 
