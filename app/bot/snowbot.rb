@@ -134,16 +134,16 @@ def greet_current_user(postback)
   current_user.last_name = last_name
   current_user.save
 
-  postback.reply(
-    attachment:{
-      type:"image",
-      payload:{
+  # postback.reply(
+    # attachment:{
+      # type:"image",
+      # payload:{
         # url:"https://media.giphy.com/media/3oxHQiF8d5gF1DqG2s/giphy.gif",
-        url:"https://www.snowbot-ai.com/loader-welcome.gif",
-        is_reusable:true
-      }
-    }
-  )
+        # url:"https://www.snowbot-ai.com/loader-welcome.gif",
+        # is_reusable:true
+      # }
+    # }
+  # )
   postback.reply(
     text: "Hello #{first_name} I am SnowBot 🤖 the ski specialist ! Ready to book your next trip? 🏂"
   )
