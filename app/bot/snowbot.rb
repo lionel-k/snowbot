@@ -5,7 +5,7 @@ include Facebook::Messenger
 
 Facebook::Messenger::Profile.set({
   whitelisted_domains: [
-    "https://snowbots-app.herokuapp.com",
+    "https://www.snowbot-ai.com",
     "https://odis.homeaway.com",
     "https://drivy.imgix.net",
     "https://img1.onthesnow.com",
@@ -55,7 +55,7 @@ Bot.on :postback do |postback|
                               subtitle: "... and book your ski trip in the most snowy ski resorts 😀",
                               default_action: {
                                 type: "web_url",
-                                url: "https://snowbots-app.herokuapp.com"
+                                url: "https://www.snowbot-ai.com"
                               },
                               buttons:[
                                 {
@@ -134,16 +134,16 @@ def greet_current_user(postback)
   current_user.last_name = last_name
   current_user.save
 
-  # postback.reply(
-    # attachment:{
-      # type:"image",
-      # payload:{
+  postback.reply(
+    attachment:{
+      type:"image",
+      payload:{
         # url:"https://media.giphy.com/media/3oxHQiF8d5gF1DqG2s/giphy.gif",
-        # url:"https://www.snowbot-ai.com/loader-welcome.gif",
-        # is_reusable:true
-      # }
-    # }
-  # )
+        url:"https://www.snowbot-ai.com/loader-welcome.gif",
+        is_reusable:true
+      }
+    }
+  )
   postback.reply(
     text: "Hello #{first_name} I am SnowBot 🤖 the ski specialist ! Ready to book your next trip? 🏂"
   )
