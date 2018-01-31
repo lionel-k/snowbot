@@ -84,7 +84,7 @@ class BotOffersCreationJob < ApplicationJob
                     buttons:[
                       {
                         type:"web_url",
-                        url:"https://snowbots-app.herokuapp.com/offers/#{offer.id}",
+                        url:"https://www.snowbot-ai.com/offers/#{offer.id}",
                         title:"See more details"
                       }
                     ]
