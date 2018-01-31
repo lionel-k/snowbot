@@ -18,6 +18,9 @@ class User < ApplicationRecord
     Rails.logger.debug "auth: #{auth.info.image}"
     Rails.logger.debug "auth: #{auth.credentials.token}"
     Rails.logger.debug "auth: #{auth.credentials.expires_at}"
+    Rails.logger.debug "auth: #{auth.provider}"
+    Rails.logger.debug "auth: #{auth.uid}"
+    Rails.logger.debug "auth: #{auth.info.email}"
 
     user_params = auth.slice(:provider, :uid)
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
